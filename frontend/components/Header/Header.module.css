@@ -1,0 +1,29 @@
+.header {
+  /* background-color: #002265; */
+  /* background-color: #1739d2; */
+  /* background-color: #1e44ce; */
+  background-color: #0f0e15;
+  padding: 20px;
+}
+
+.inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  height: 55px;
+  cursor: pointer;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav_link {
+  color: #fff;
+  font-family: 'Montserrat SemiBold', sans-serif;
+  margin-left: 40px;
+}

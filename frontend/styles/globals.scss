@@ -1,0 +1,50 @@
+@import 'vars';
+@import 'fonts';
+
+html,
+body {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-size: 16px;
+  color: #0f0e15;
+}
+
+.container {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.required,
+.danger,
+.primary {
+  color: $primary;
+  text-shadow: 0 0 20px $primary;
+}
+
+.button {
+  font-family: 'Montserrat Bold';
+  border: 0;
+  display: block;
+  margin: 0 auto;
+  padding: 15px 20px;
+  border-radius: 5px;
+  background-color: $primary;
+  cursor: pointer;
+  color: #fff;
+  box-shadow: 0 0 5px $primary, 0 0 20px $primary;
+  transition: all 0.5s;
+  &:hover {
+    background-color: darken($color: $primary, $amount: 10%);
+    box-shadow: 0 0 5px $primary, 0 0 30px $primary;
+  }
+}
