@@ -1,19 +1,23 @@
+import Link from 'next/link'
 import styles from './NeonButton.module.scss'
+import classnames from 'classnames'
 
 interface Props {
-  className?: string
   children: string
+  href: string
 }
 
-const NeonButton: React.FC<Props> = ({ children, className }) => {
+const NeonButton: React.FC<Props> = ({ children, href }) => {
   return (
-    <a className={styles.button}>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      {children}
-    </a>
+    <Link href={href}>
+      <a className={styles.button}>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        {children}
+      </a>
+    </Link>
   )
 }
 

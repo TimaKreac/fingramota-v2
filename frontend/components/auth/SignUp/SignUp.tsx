@@ -7,19 +7,19 @@ import Input from '../../Input/Input'
 
 import styles from './SignUp.module.scss'
 
-const SignUpComponent = () => {
+const SignUpComponent: React.FC = () => {
   const [state, setState] = useState({
     firstName: 'Тамерлан',
     lastName: 'Тельгарин',
     email: 'tkreac@gmail.com',
     password: 'tima6452',
-    repeat_password: 'tima6452',
+    repeatPassword: 'tima6452',
     error: '',
     loading: false,
     message: '',
   })
 
-  const { firstName, lastName, email, password, repeat_password, error } = state
+  const { firstName, lastName, email, password, repeatPassword, error } = state
 
   const comparePasswords = (password, repeat_password) => {
     if (password === repeat_password) {
@@ -36,7 +36,7 @@ const SignUpComponent = () => {
   const onSubmitHandler = async (e) => {
     try {
       e.preventDefault()
-      const isMatchPasswords = comparePasswords(password, repeat_password)
+      const isMatchPasswords = comparePasswords(password, repeatPassword)
       if (!isMatchPasswords) {
         throw new Error('Пароли не совпадают')
       }
@@ -90,10 +90,10 @@ const SignUpComponent = () => {
         <Input
           type='password'
           title='Повторите пароль'
-          name='repeat_password'
+          name='repeatPassword'
           required
           onChange={onChangeHandler}
-          value={state.repeat_password}
+          value={state.repeatPassword}
         />
 
         <button className='button' disabled={false} type='submit'>

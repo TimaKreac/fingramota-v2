@@ -4,21 +4,22 @@
   display: inline-block;
   cursor: pointer;
   padding: 15px 20px;
-  margin-left: 40px;
   color: #fff;
   text-decoration: none;
   transition: 0.5s;
   overflow: hidden;
   filter: hue-rotate(0deg);
   border-radius: 5px;
-}
-
-.button:hover {
-  background: $primary;
   color: #fff;
-  box-shadow: 0 0 5px $primary, 0 0 25px $primary, 0 0 50px $primary,
-    0 0 200px $primary;
-  // -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+  font-family: 'Montserrat SemiBold', sans-serif;
+  margin-left: 40px;
+  &:hover,
+  &:focus {
+    background: $primary;
+    color: #fff;
+    box-shadow: 0 0 5px $primary, 0 0 25px $primary, 0 0 50px $primary,
+      0 0 200px $primary;
+  }
 }
 
 .button span {

@@ -2,7 +2,7 @@ import Link from 'next/link'
 import classNames from 'classnames'
 
 import NeonButton from '../NeonButton/NeonButton'
-import styles from './Header.module.css'
+import styles from './Header.module.scss'
 
 const Header = () => {
   return (
@@ -15,14 +15,7 @@ const Header = () => {
           <Link href='/profile'>
             <a className={styles.nav_link}>Профиль</a>
           </Link>
-          {/* <Link href='/logout'>
-            <a className={styles.nav_link}>Выйти</a>
-          </Link> */}
-          <Link href='/logout'>
-            <NeonButton className={styles.nav_link}>
-              Войти / Регистрация
-            </NeonButton>
-          </Link>
+          <NeonButton href='/signup'>Войти / Регистрация</NeonButton>
         </nav>
       </div>
     </header>

@@ -1,0 +1,50 @@
+@import '../../styles/vars';
+
+.header {
+  background-color: #0f0e15;
+  padding: 20px;
+}
+
+.inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  height: 55px;
+  cursor: pointer;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav_link {
+  color: #fff;
+  font-family: 'Montserrat SemiBold', sans-serif;
+  margin-left: 40px;
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: -7px;
+    display: block;
+    height: 2px;
+    width: 100%;
+    transition: 0.5s;
+    background: $primary;
+    box-shadow: 0 0 5px $primary, 0 0 20px $primary;
+    transform: scale(0);
+    transform-origin: left;
+  }
+  &:hover,
+  &:focus {
+    &:after {
+      transform: scale(1);
+      transform-origin: right;
+    }
+  }
+}
