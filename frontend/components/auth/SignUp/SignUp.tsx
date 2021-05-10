@@ -19,7 +19,7 @@ const SignUpComponent: React.FC = () => {
     message: '',
   })
 
-  const { firstName, lastName, email, password, repeatPassword, error } = state
+  const { firstName, lastName, email, password, repeatPassword } = state
 
   const comparePasswords = (password, repeat_password) => {
     if (password === repeat_password) {
@@ -55,7 +55,6 @@ const SignUpComponent: React.FC = () => {
   return (
     <div className={classNames('container', styles.inner)}>
       <form className={styles.form} onSubmit={onSubmitHandler}>
-        <p>{error}</p>
         <div className={styles.title}>Регистрация</div>
         <Input
           title='Фамилия'
