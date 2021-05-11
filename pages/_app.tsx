@@ -1,4 +1,5 @@
 import { AppProps } from 'next/app'
+
 import 'reset-css'
 import '../styles/globals.scss'
 
