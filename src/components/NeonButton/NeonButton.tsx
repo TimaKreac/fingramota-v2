@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import styles from './NeonButton.module.scss'
-import classnames from 'classnames'
 
 interface Props {
   children: string

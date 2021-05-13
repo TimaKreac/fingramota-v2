@@ -1,25 +1,29 @@
-import Link from 'next/link'
+import { useState } from 'react'
 import classNames from 'classnames'
+import Link from 'next/link'
 
-import NeonButton from '../NeonButton/NeonButton'
+import Navbar from './Navbar'
+import Hamburger from './Hamburger/Hamburger'
+
 import styles from './Header.module.scss'
 
 const Header = () => {
+  const [isOpen, setisOpen] = useState(false)
+
+  const toggleMenu = () => {
+    setisOpen(!isOpen)
+  }
+
   return (
     <header className={styles.header}>
       <div className={classNames('container', styles.inner)}>
         <Link href='/'>
-          <img className={styles.logo} src='/logo.svg' alt='logo' />
+          <img className={styles.logo} src='/logo.svg' alt='fingramota logo' />
         </Link>
-        <nav className={styles.nav}>
-          <Link href='/'>
-            <a className={styles.nav_link}>Главная</a>
-          </Link>
-          <Link href='/profile'>
-            <a className={styles.nav_link}>Профиль</a>
-          </Link>
-          <NeonButton href='/signup'>Войти / Регистрация</NeonButton>
-        </nav>
+
+        <Navbar isOpen={isOpen} styles={styles} />
+
+        <Hamburger isOpen={isOpen} onToggleMenu={toggleMenu} />
       </div>
     </header>
   )
