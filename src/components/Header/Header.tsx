@@ -12,6 +12,9 @@ const Header = () => {
           <img className={styles.logo} src='/logo.svg' alt='logo' />
         </Link>
         <nav className={styles.nav}>
+          <Link href='/'>
+            <a className={styles.nav_link}>Главная</a>
+          </Link>
           <Link href='/profile'>
             <a className={styles.nav_link}>Профиль</a>
           </Link>

@@ -1,5 +1,5 @@
-import Header from '../components/Header/Header'
-import SignInComponent from '../components/auth/SignIn/SignIn'
+import Header from '../src/components/Header/Header'
+import SignInComponent from '../src/components/auth/SignIn/SignIn'
 
 const SignIn: React.FC = () => {
   return (

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import classNames from 'classnames'
 import axios from 'axios'
@@ -8,7 +8,7 @@ import Input from '../../Input/Input'
 import styles from './SignUp.module.scss'
 
 const SignUpComponent: React.FC = () => {
-  const [state, setState] = useState({
+  const [userForm, setUserForm] = useState({
     firstName: 'Тамерлан',
     lastName: 'Тельгарин',
     email: 'tkreac@gmail.com',
@@ -19,7 +19,7 @@ const SignUpComponent: React.FC = () => {
     message: '',
   })
 
-  const { firstName, lastName, email, password, repeatPassword } = state
+  const { firstName, lastName, email, password, repeatPassword } = userForm
 
   const comparePasswords = (password, repeat_password) => {
     if (password === repeat_password) {
@@ -30,25 +30,30 @@ const SignUpComponent: React.FC = () => {
   }
 
   const onChangeHandler = (e) => {
-    setState({ ...state, [e.target.name]: e.target.value })
+    setUserForm({ ...userForm, [e.target.name]: e.target.value })
   }
 
   const onSubmitHandler = async (e) => {
     try {
       e.preventDefault()
+
       const isMatchPasswords = comparePasswords(password, repeatPassword)
+
       if (!isMatchPasswords) {
         throw new Error('Пароли не совпадают')
       }
-      const res = await axios.post('http://localhost:8000/api/signup', {
+
+      const userInfo = {
         firstName,
         lastName,
         email,
         password,
-      })
+      }
+
+      const res = await axios.post('http://localhost:8000/api/signup', userInfo)
       console.log(res.data)
     } catch (error) {
-      setState({ ...state, error: error.message })
+      setUserForm({ ...userForm, error: error.message })
     }
   }
 
@@ -61,14 +66,14 @@ const SignUpComponent: React.FC = () => {
           name='lastName'
           required
           onChange={onChangeHandler}
-          value={state.lastName}
+          value={lastName}
         />
         <Input
           title='Имя'
           name='firstName'
           required
           onChange={onChangeHandler}
-          value={state.firstName}
+          value={firstName}
         />
         <Input
           title='Эл.адрес'
@@ -76,7 +81,7 @@ const SignUpComponent: React.FC = () => {
           required
           onChange={onChangeHandler}
           placeholder={'example@example.com'}
-          value={state.email}
+          value={email}
         />
         <Input
           title='Пароль'
@@ -84,7 +89,7 @@ const SignUpComponent: React.FC = () => {
           name='password'
           required
           onChange={onChangeHandler}
-          value={state.password}
+          value={password}
         />
         <Input
           type='password'
@@ -92,7 +97,7 @@ const SignUpComponent: React.FC = () => {
           name='repeatPassword'
           required
           onChange={onChangeHandler}
-          value={state.repeatPassword}
+          value={repeatPassword}
         />
 
         <button className='button' disabled={false} type='submit'>
