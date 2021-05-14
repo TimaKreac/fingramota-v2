@@ -1,5 +1,6 @@
 import { AppProps } from 'next/app'
 import { Provider } from 'react-redux'
+import { createWrapper } from 'next-redux-wrapper'
 
 import store from '../src/redux/store'
 
@@ -8,7 +9,7 @@ import Layout from '../src/components/Layout'
 import 'reset-css'
 import '../src/styles/global.scss'
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <Provider store={store}>
       <Layout>
@@ -18,4 +19,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   )
 }
 
-export default MyApp
+const makeStore = () => store
+
+const wrapper = createWrapper(makeStore)
+
+export default wrapper.withRedux(MyApp)

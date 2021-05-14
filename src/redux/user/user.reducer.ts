@@ -1,19 +1,28 @@
-import { CHANGE_SIGN_UP_FORM } from './user.types'
+import * as t from './user.types'
 
-const INITIAL_STATE = {}
+interface UserInfo {
+  email: string
+  firstName: string
+  lastName: string
+}
 
-const userReducer = (state = INITIAL_STATE, action) => {
+const initialState = {
+  userInfo: {} as UserInfo,
+}
+
+const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case CHANGE_SIGN_UP_FORM:
+    case t.USER_SIGNED_IN:
       return {
         ...state,
-        signUpForm: {
-          ...state.signUpForm,
-          [action.payload.key]: action.payload.value,
-        },
+        userInfo: action.payload,
       }
-    case 'USER_SIGN_UP':
-      return state
+    case t.USER_SIGNED_UP:
+      return {
+        ...state,
+        userInfo: action.payload,
+      }
+
     default:
       return state
   }

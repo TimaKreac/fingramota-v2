@@ -1,85 +1,92 @@
 import { useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import classNames from 'classnames'
 import axios from 'axios'
+import { connect } from 'react-redux'
 
 import Input from '../../Input/Input'
 
 import styles from './SignUp.module.scss'
+import { userSignUp } from '../../../redux/user/user.actions'
 
-const SignUpComponent: React.FC = () => {
-  const [userForm, setUserForm] = useState({
-    firstName: 'Тамерлан',
-    lastName: 'Тельгарин',
-    email: 'tkreac@gmail.com',
-    password: 'tima6452',
-    repeatPassword: 'tima6452',
-    error: '',
-    loading: false,
-    message: '',
-  })
+interface userInfo {
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+}
 
-  const { firstName, lastName, email, password, repeatPassword } = userForm
+interface Props {
+  onSignUp: (userInfo: userInfo, cb?: () => void) => void
+}
 
-  const comparePasswords = (password, repeat_password) => {
-    if (password === repeat_password) {
-      return true
-    } else {
-      return false
-    }
+const SignUpComponent: React.FC<Props> = ({ onSignUp }) => {
+  const router = useRouter()
+  const [email, setEmail] = useState('tkreac@gmail.com')
+  const [password, setPassword] = useState('tima6452')
+  const [repeatPassword, setRepeatPassword] = useState('tima6452')
+  const [firstName, setFirstName] = useState('Тамерлан')
+  const [lastName, setLastName] = useState('Тельгарин')
+  const [error, setError] = useState('')
+
+  const setter = (set) => (e) => {
+    set(e.target.value)
   }
 
-  const onChangeHandler = (e) => {
-    setUserForm({ ...userForm, [e.target.name]: e.target.value })
+  const compare = (password, repeat_password) => {
+    return password === repeat_password
   }
 
-  const onSubmitHandler = async (e) => {
+  const submitHandler = async (e) => {
     try {
       e.preventDefault()
 
-      const isMatchPasswords = comparePasswords(password, repeatPassword)
+      const isMatchPasswords = compare(password, repeatPassword)
 
       if (!isMatchPasswords) {
         throw new Error('Пароли не совпадают')
       }
 
-      const userInfo = {
+      const userInfo: userInfo = {
         firstName,
         lastName,
         email,
         password,
       }
 
-      const res = await axios.post('http://localhost:8000/api/signup', userInfo)
-      console.log(res.data)
+      onSignUp(userInfo, () => {
+        router.push('/')
+      })
     } catch (error) {
-      setUserForm({ ...userForm, error: error.message })
+      setter(setError)
     }
   }
 
   return (
     <div className={classNames('container', styles.inner)}>
-      <form className={styles.form} onSubmit={onSubmitHandler}>
+      <form className={styles.form} onSubmit={submitHandler}>
         <div className={styles.title}>Регистрация</div>
+        {error}
         <Input
           title='Фамилия'
           name='lastName'
           required
-          onChange={onChangeHandler}
+          onChange={setter(setLastName)}
           value={lastName}
         />
         <Input
           title='Имя'
           name='firstName'
           required
-          onChange={onChangeHandler}
+          onChange={setter(setFirstName)}
           value={firstName}
         />
         <Input
           title='Эл.адрес'
           name='email'
           required
-          onChange={onChangeHandler}
+          onChange={setter(setEmail)}
           placeholder={'example@example.com'}
           value={email}
         />
@@ -88,7 +95,7 @@ const SignUpComponent: React.FC = () => {
           type='password'
           name='password'
           required
-          onChange={onChangeHandler}
+          onChange={setter(setPassword)}
           value={password}
         />
         <Input
@@ -96,7 +103,7 @@ const SignUpComponent: React.FC = () => {
           title='Повторите пароль'
           name='repeatPassword'
           required
-          onChange={onChangeHandler}
+          onChange={setter(setRepeatPassword)}
           value={repeatPassword}
         />
 
@@ -114,4 +121,10 @@ const SignUpComponent: React.FC = () => {
   )
 }
 
-export default SignUpComponent
+const mapDispatchToProps = (dispatch) => ({
+  onSignUp: (userInfo, cb) => {
+    dispatch(userSignUp(userInfo, cb))
+  },
+})
+
+export default connect(null, mapDispatchToProps)(SignUpComponent)
