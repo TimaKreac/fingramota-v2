@@ -32,7 +32,7 @@ const SignIn: React.FC<Props> = () => {
           required
           onChange={onChangeHandler}
           placeholder={'example@example.com'}
-          value={state.email}
+          value={email}
         />
         <Input
           title='Пароль'
@@ -40,7 +40,7 @@ const SignIn: React.FC<Props> = () => {
           name='password'
           required
           onChange={onChangeHandler}
-          value={state.password}
+          value={password}
         />
 
         <button className='button' disabled={false} type='submit'>
