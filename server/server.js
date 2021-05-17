@@ -23,7 +23,7 @@ mongoose
   })
 
 // middlewares
-app.use(express.json({ extended: true }))
+app.use(express.json())
 app.use(morgan('dev'))
 app.use(cookieParser())
 //cors

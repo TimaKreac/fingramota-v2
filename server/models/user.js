@@ -34,11 +34,6 @@ const userSchema = new Schema(
       default: 'user',
     },
 
-    salt: {
-      type: String,
-      required: true,
-    },
-
     resetPasswordLink: {
       data: String,
       default: '',

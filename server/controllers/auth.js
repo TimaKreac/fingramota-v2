@@ -1,7 +1,13 @@
 const User = require('../models/user')
 const argon2 = require('argon2')
-const randomBytes = require('randombytes')
 const jwt = require('jsonwebtoken')
+
+const tokenOptions = {
+  maxAge: 31536000000,
+  httpOnly: true,
+  secure: true,
+  sameSite: true,
+}
 
 exports.signup = async (req, res) => {
   const { email, password, firstName, lastName } = req.body
@@ -14,15 +20,13 @@ exports.signup = async (req, res) => {
     })
   }
 
-  const salt = randomBytes(32)
-  const passwordHashed = await argon2.hash(password, { salt })
+  const passwordHashed = await argon2.hash(password)
 
   const user = await User.create({
     email,
     password: passwordHashed,
     firstName,
     lastName,
-    salt: salt.toString('hex'),
   })
   const token = generateJWT(user)
   res.cookie('token', token, {
@@ -63,12 +67,7 @@ exports.signin = async (req, res) => {
   }
 
   const token = generateJWT(user)
-  res.cookie('token', token, {
-    maxAge: 31536000000,
-    httpOnly: true,
-    secure: true,
-    sameSite: true,
-  })
+  res.cookie('token', token, tokenOptions)
 
   res.json({
     user: {
@@ -82,21 +81,17 @@ exports.signin = async (req, res) => {
 }
 
 exports.signout = (req, res) => {
-  res.clearCookie('token', {
-    maxAge: 31536000000,
-    httpOnly: true,
-    secure: true,
-    sameSite: true,
-  })
+  res.clearCookie('token', tokenOptions)
   res.json({
     message: 'Успешный выход из аккаунта',
   })
 }
 
 function generateJWT(user) {
+  const { _id, email } = user
   return jwt.sign(
     {
-      data: { _id: user._id, email: user.email },
+      data: { _id, email },
     },
     process.env.JWT_SECRET,
     { expiresIn: '365d' }
