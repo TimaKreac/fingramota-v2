@@ -6,6 +6,7 @@ import Navbar from './Navbar'
 import Hamburger from './Hamburger/Hamburger'
 
 import styles from './Header.module.scss'
+import { connect } from 'react-redux'
 
 const Header = () => {
   const [isOpen, setisOpen] = useState(false)
@@ -29,4 +30,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default connect()(Header)

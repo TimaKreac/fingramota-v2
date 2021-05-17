@@ -28,7 +28,7 @@ $text: darken($primary, 10%);
   font-size: 5px;
   & h1 {
     animation: fly 5s infinite ease-in-out;
-    font-family: 'Montserrat Bold';
+    font-weight: 900;
     font-size: 20em;
     transition: all 0.3s ease;
     letter-spacing: 15px;
@@ -44,8 +44,8 @@ $text: darken($primary, 10%);
   & h2 {
     margin-top: 50px;
     margin-bottom: 100px;
-    font-family: 'Montserrat Bold';
-    font-size: 5em;
+    font-weight: 900;
+    font-size: 4em;
     transition: all 0.3s ease;
     letter-spacing: 4px;
     color: $primary;
@@ -53,12 +53,12 @@ $text: darken($primary, 10%);
   }
 
   & a {
-    font-family: 'Montserrat Bold';
+    font-weight: 900;
     letter-spacing: 3px;
     font-size: 3em;
     background: $primary;
     color: #fff;
-    box-shadow: 0 0 5px $primary;
+    box-shadow: 0;
     margin: 0;
   }
 }

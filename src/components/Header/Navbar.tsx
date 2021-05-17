@@ -60,7 +60,7 @@ const Navbar: React.FC<Props> = ({ styles, isOpen }) => {
         </>
       )}
 
-      {!isOpen && <NeonButton href='/signup'>Войти / Регистрация</NeonButton>}
+      {!isOpen && <NeonButton href='/signin'>Войти / Регистрация</NeonButton>}
     </nav>
   )
 }

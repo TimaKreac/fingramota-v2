@@ -1,0 +1,83 @@
+@import '../../styles/vars';
+
+@keyframes start {
+  0% {
+    transform: scale(0);
+    transform-origin: center;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.form {
+  border-radius: 10px;
+  width: 500px;
+  padding: 40px 15px;
+  background-color: $gray;
+  animation: start 1s ease forwards;
+  & button {
+    margin-top: 25px;
+  }
+}
+
+.inner {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 35px;
+}
+
+.account {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 14px;
+  & a {
+    display: inline-block;
+    transition: 0.5s;
+    position: relative;
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      display: block;
+      height: 2px;
+      width: 100%;
+      transition: 0.5s;
+      background: $primary;
+      box-shadow: 0 0 5px $primary, 0 0 10px $primary;
+      transform: scale(0);
+      transform-origin: center;
+    }
+    &.active,
+    &:hover,
+    &:focus {
+      &:after {
+        transform: scale(1);
+      }
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  .form {
+    padding: 40px 30px;
+  }
+
+  .inner {
+    padding: 50px 15px;
+  }
+
+  .title {
+    font-size: 26px;
+  }
+}

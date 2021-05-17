@@ -4,10 +4,10 @@ import classNames from 'classnames'
 import { connect } from 'react-redux'
 import { useRouter } from 'next/router'
 
-import Input from '../../Input/Input'
+import Input from '../Input/Input'
 
-import styles from './SignIn.module.scss'
-import { userSignIn } from '../../../redux/user/user.actions'
+import styles from './Auth.module.scss'
+import { userSignIn } from '../../redux/user/user.actions'
 
 interface userInfo {
   email: string
@@ -43,7 +43,7 @@ const SignIn: React.FC<Props> = ({ onSignIn }) => {
   return (
     <div className={classNames('container', styles.inner)}>
       <form className={styles.form} onSubmit={submitHandler}>
-        <div className={styles.title}>Авторизация</div>
+        <h2 className={styles.title}>Авторизация</h2>
         <Input
           title='Эл.адрес'
           name='email'

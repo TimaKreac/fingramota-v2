@@ -5,10 +5,10 @@ import classNames from 'classnames'
 import axios from 'axios'
 import { connect } from 'react-redux'
 
-import Input from '../../Input/Input'
+import Input from '../Input/Input'
 
-import styles from './SignUp.module.scss'
-import { userSignUp } from '../../../redux/user/user.actions'
+import styles from './Auth.module.scss'
+import { userSignUp } from '../../redux/user/user.actions'
 
 interface userInfo {
   firstName: string
@@ -66,7 +66,7 @@ const SignUpComponent: React.FC<Props> = ({ onSignUp }) => {
   return (
     <div className={classNames('container', styles.inner)}>
       <form className={styles.form} onSubmit={submitHandler}>
-        <div className={styles.title}>Регистрация</div>
+        <h2 className={styles.title}>Регистрация</h2>
         {error}
         <Input
           title='Фамилия'

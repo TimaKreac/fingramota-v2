@@ -28,7 +28,7 @@ const Input: React.FC<Props> = ({
       <label className={styles.wrapper}>
         <p>
           {title}&nbsp;
-          {required && <span className='required'>*</span>}
+          {/* {required && <span className='required'>*</span>} */}
         </p>
         <input
           type={type}

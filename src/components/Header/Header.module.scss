@@ -57,10 +57,10 @@
 
 .nav_link {
   color: #fff;
-  font-family: 'Montserrat SemiBold', sans-serif;
+  font-weight: 600;
+  letter-spacing: 1px;
   margin-left: 40px;
   position: relative;
-
   &:after {
     content: '';
     position: absolute;
@@ -81,6 +81,12 @@
       transform: scale(1);
       transform-origin: right;
     }
+  }
+}
+
+@media (min-width: 320px) {
+  .logo {
+    height: 40px;
   }
 }
 

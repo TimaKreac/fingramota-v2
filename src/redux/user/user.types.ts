@@ -1,2 +1,3 @@
 export const USER_SIGNED_IN = 'USER_SIGNED_IN'
 export const USER_SIGNED_UP = 'USER_SIGNED_UP'
+export const GET_USER_INFO = 'GET_USER_INFO'

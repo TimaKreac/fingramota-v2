@@ -1,7 +1,20 @@
 import axios from 'axios'
 import * as t from './user.types'
 import { API } from '../../../config'
-import { setCookie, setLocalStorage } from '../../utils/auth'
+import { setCookie, setLocalStorage, getCookie } from '../../utils/auth'
+
+export const getInitialUserInfo = () => {
+  if (process.browser) {
+    const cookieChecked = getCookie('token')
+    if (cookieChecked) {
+      const userInfo = localStorage.getItem('user')
+      return {
+        type: t.GET_USER_INFO,
+        payload: userInfo,
+      }
+    }
+  }
+}
 
 export const userSignIn = (userInfo, cb?: () => void) => async (dispatch) => {
   try {
