@@ -3,14 +3,13 @@ import Link from 'next/link'
 import classNames from 'classnames'
 import NeonButton from '../NeonButton/NeonButton'
 
+import styles from './Navbar.module.scss'
+
 interface Props {
   isOpen: boolean
-  styles: {
-    readonly [key: string]: string
-  }
 }
 
-const Navbar: React.FC<Props> = ({ styles, isOpen }) => {
+const Navbar: React.FC<Props> = ({ isOpen }) => {
   const router = useRouter()
 
   return (

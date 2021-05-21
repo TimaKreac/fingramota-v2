@@ -1,0 +1,96 @@
+@import '../../styles/_vars.scss';
+
+.fixedLogo {
+  padding: 20px 0;
+  position: sticky;
+  top: 0;
+  background-color: $gray;
+  border-bottom: 3px solid $primary;
+}
+
+.fake_sidebar {
+  width: 400px;
+}
+
+.sidebar {
+  background-color: $gray;
+  max-height: 100vh;
+  height: 100vh;
+  overflow-y: auto;
+  width: 400px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  h1 {
+    font-size: 24px;
+    text-align: center;
+    padding: 20px 0;
+
+    border-bottom: 3px solid $primary;
+    letter-spacing: 1px;
+  }
+}
+
+.categories {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  p {
+    padding: 20px 0;
+  }
+}
+
+.articles {
+  display: flex;
+  margin-top: 20px;
+  flex-direction: column;
+  overflow-y: auto;
+  .article {
+    cursor: pointer;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border: 2px solid transparent;
+    transition: 0.5s;
+    &:hover {
+      border: 2px solid $secondary;
+    }
+    span {
+      display: block;
+      text-align: center;
+      margin-right: 15px;
+      font-size: 32px;
+      font-weight: 700;
+    }
+    a {
+      line-height: 1.6;
+    }
+  }
+}
+
+.logo {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  height: 35px;
+  cursor: pointer;
+}
+
+@media (min-width: 320px) {
+  .logo {
+    height: 40px;
+  }
+}
+
+@media (min-width: 576px) {
+  .logo {
+    height: 45px;
+  }
+}
+
+@media (min-width: 992px) {
+  .logo {
+    height: 50px;
+  }
+}

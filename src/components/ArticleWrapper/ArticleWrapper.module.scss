@@ -1,0 +1,12 @@
+.main {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  width: calc(100vw - 400px);
+  nav {
+    width: 100%;
+    align-self: start;
+    display: flex;
+    justify-content: flex-end;
+  }
+}

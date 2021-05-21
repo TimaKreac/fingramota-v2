@@ -41,7 +41,7 @@ const SignIn: React.FC<Props> = ({ onSignIn }) => {
   }
 
   return (
-    <div className={classNames('container', styles.inner)}>
+    <div className={styles.inner}>
       <form className={styles.form} onSubmit={submitHandler}>
         <h2 className={styles.title}>Авторизация</h2>
         <Input

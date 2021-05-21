@@ -1,12 +1,15 @@
-import Header from '../src/components/Header/Header'
+import React from 'react'
+import { NextPage } from 'next'
+import Sidebar from '../src/components/Sidebar/Sidebar'
+import ArticleWrapper from '../src/components/ArticleWrapper/ArticleWrapper'
 
-export default function Home() {
+const HomePage: NextPage = () => {
   return (
-    <div>
-      <Header />
-      <div className='container'>
-        <h1>Категории</h1>
-      </div>
+    <div className='d-flex'>
+      <Sidebar type='categories' />
+      <ArticleWrapper isIndex />
     </div>
   )
 }
+
+export default HomePage
