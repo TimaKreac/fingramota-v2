@@ -7,7 +7,7 @@ const { runValidation } = require('../validators')
 const {
   userSignupValidator,
   userSigninValidator,
-} = require('../validators/auth')
+} = require('../validators/auth.validator')
 
 router.post('/signup', userSignupValidator, runValidation, signup)
 router.post('/signin', userSigninValidator, runValidation, signin)
