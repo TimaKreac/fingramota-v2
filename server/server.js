@@ -8,7 +8,9 @@ require('dotenv').config()
 const app = express()
 
 // bring routes
-const userRoutes = require('./routes/user')
+const userRoutes = require('./routes/user.route')
+const categoryRoutes = require('./routes/category.route')
+const articleRoutes = require('./routes/article.route')
 
 // db
 mongoose
@@ -32,6 +34,8 @@ if (process.env.NODE_ENV === 'development') {
 }
 // routes
 app.use('/api', userRoutes)
+app.use('/api', categoryRoutes)
+app.use('/api', articleRoutes)
 
 const port = process.env.PORT || 8000
 

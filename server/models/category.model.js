@@ -12,8 +12,9 @@ const categorySchema = new Schema(
       type: String,
       unique: true,
       index: true,
+      required: true,
     },
-    articles: [{ type: Types.ObjectId, ref: 'Article', required: true }],
+    articles: [{ type: Types.ObjectId, ref: 'Article' }],
   },
   { timestamps: true }
 )
