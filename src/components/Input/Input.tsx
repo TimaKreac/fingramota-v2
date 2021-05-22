@@ -26,10 +26,7 @@ const Input: React.FC<Props> = ({
   return (
     <>
       <label className={styles.wrapper}>
-        <p>
-          {title}&nbsp;
-          {/* {required && <span className='required'>*</span>} */}
-        </p>
+        <p>{title}&nbsp;</p>
         <input
           type={type}
           name={name}
