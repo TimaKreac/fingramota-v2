@@ -1,13 +1,10 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
-import classNames from 'classnames'
-import { connect } from 'react-redux'
 import { useRouter } from 'next/router'
 
 import Input from '../Input/Input'
 
 import styles from './Auth.module.scss'
-import { userSignIn } from '../../redux/user/user.actions'
 
 interface userInfo {
   email: string
@@ -23,11 +20,13 @@ const SignIn: React.FC<Props> = ({ onSignIn }) => {
   const [email, setEmail] = useState('tkreac@gmail.com')
   const [password, setPassword] = useState('tima6452')
 
-  const setter = (set) => (e) => {
-    set(e.target.value)
-  }
+  const setter =
+    (set: React.Dispatch<React.SetStateAction<string>>) =>
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      set(e.target.value)
+    }
 
-  const submitHandler = (e) => {
+  const submitHandler = (e: React.FormEvent) => {
     e.preventDefault()
 
     const userInfo: userInfo = {
@@ -75,10 +74,4 @@ const SignIn: React.FC<Props> = ({ onSignIn }) => {
   )
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  onSignIn: (userInfo, cb) => {
-    dispatch(userSignIn(userInfo, cb))
-  },
-})
-
-export default connect(null, mapDispatchToProps)(SignIn)
+export default SignIn

@@ -119,3 +119,17 @@ i {
 .d-flex {
   display: flex;
 }
+
+#nprogress {
+  & .bar {
+    background: $secondary !important;
+    height: 4px !important;
+  }
+  & .spinner-icon {
+    border-top-color: $secondary !important;
+    border-left-color: $secondary !important;
+  }
+  & .peg {
+    box-shadow: 0 0 10px $secondary, 0 0 5px $secondary !important;
+  }
+}

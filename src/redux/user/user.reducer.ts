@@ -1,18 +1,6 @@
-import { AnyAction } from 'redux'
-import { HYDRATE } from 'next-redux-wrapper'
-import * as t from './user.types'
+import { UserState, UserActionTypes, UserAction } from './user.types'
 
-interface UserInfo {
-  email: string
-  firstName: string
-  lastName: string
-}
-
-interface State {
-  userInfo: UserInfo
-}
-
-const initialState = {
+const initialState: UserState = {
   userInfo: {
     email: '',
     firstName: '',
@@ -20,19 +8,19 @@ const initialState = {
   },
 }
 
-const userReducer = (state: State = initialState, action: AnyAction) => {
+const userReducer = (state = initialState, action: UserAction): UserState => {
   switch (action.type) {
-    case t.GET_USER_INFO:
+    case UserActionTypes.GET_USER_INFO:
       return {
         ...state,
         userInfo: action.payload,
       }
-    case t.USER_SIGNED_IN:
+    case UserActionTypes.USER_SIGNED_IN:
       return {
         ...state,
         userInfo: action.payload,
       }
-    case t.USER_SIGNED_UP:
+    case UserActionTypes.USER_SIGNED_UP:
       return {
         ...state,
         userInfo: action.payload,

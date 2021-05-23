@@ -1,14 +1,11 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import classNames from 'classnames'
-import axios from 'axios'
-import { connect } from 'react-redux'
 
 import Input from '../Input/Input'
 
 import styles from './Auth.module.scss'
-import { userSignUp } from '../../redux/user/user.actions'
 
 interface userInfo {
   firstName: string
@@ -30,15 +27,17 @@ const SignUpComponent: React.FC<Props> = ({ onSignUp }) => {
   const [lastName, setLastName] = useState('Тельгарин')
   const [error, setError] = useState('')
 
-  const setter = (set) => (e) => {
-    set(e.target.value)
-  }
+  const setter =
+    (set: React.Dispatch<React.SetStateAction<string>>) =>
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      set(e.target.value)
+    }
 
-  const compare = (password, repeat_password) => {
+  const compare = (password: string, repeat_password: string) => {
     return password === repeat_password
   }
 
-  const submitHandler = async (e) => {
+  const submitHandler = async (e: React.FormEvent) => {
     try {
       e.preventDefault()
 
@@ -121,10 +120,4 @@ const SignUpComponent: React.FC<Props> = ({ onSignUp }) => {
   )
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  onSignUp: (userInfo, cb) => {
-    dispatch(userSignUp(userInfo, cb))
-  },
-})
-
-export default connect(null, mapDispatchToProps)(SignUpComponent)
+export default SignUpComponent
