@@ -7,9 +7,9 @@ const { getAll, getOne, create } = require('../controllers/article.controller')
 const { runValidation } = require('../validators')
 const { articleCreateValidator } = require('../validators/article.validator')
 
-router.get('/article', getAll)
+router.get('/article/:category_slug', getAll)
 
-router.get('/article/:slug', getOne)
+router.get('/article/:category_slug/:article_slug', getOne)
 
 router.post(
   '/article',

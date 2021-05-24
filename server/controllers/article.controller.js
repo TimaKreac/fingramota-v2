@@ -6,7 +6,9 @@ const { errorHandler } = require('../helpers/dbErrorHandler')
 
 exports.getAll = async (req, res) => {
   try {
-    const articles = await Article.find({})
+    const { category_slug } = req.params
+    const category = await Category.findOne({ slug: category_slug })
+    const articles = await Article.find({ category: category._id })
     res.json(articles)
   } catch (error) {
     res.status(400).json({
@@ -18,8 +20,12 @@ exports.getAll = async (req, res) => {
 
 exports.getOne = async (req, res) => {
   try {
-    const { slug } = req.params
-    const article = await Article.findOne({ slug })
+    const { category_slug, article_slug } = req.params
+    const category = await Category.findOne({ slug: category_slug })
+    const article = await Article.findOne({
+      slug: article_slug,
+      category: category._id,
+    })
     res.json(article)
   } catch (error) {
     res.status(400).json({
@@ -31,9 +37,9 @@ exports.getOne = async (req, res) => {
 
 exports.create = async (req, res) => {
   try {
-    const { title, body, categorySlug } = req.body
+    const { title, body, category_slug } = req.body
 
-    const category = await Category.findOne({ slug: categorySlug })
+    const category = await Category.findOne({ slug: category_slug })
 
     let categoryId
     if (category) {
