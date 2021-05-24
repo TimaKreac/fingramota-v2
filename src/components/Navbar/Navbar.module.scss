@@ -2,6 +2,7 @@
 
 .nav {
   display: none;
+  padding: 10px;
   &.menu {
     display: flex;
     position: fixed;
@@ -32,6 +33,7 @@
   letter-spacing: 1px;
   margin-left: 40px;
   position: relative;
+  cursor: pointer;
   &:after {
     content: '';
     position: absolute;

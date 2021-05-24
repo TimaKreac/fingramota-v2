@@ -1,9 +1,13 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import classNames from 'classnames'
+
 import NeonButton from '../NeonButton/NeonButton'
 
 import styles from './Navbar.module.scss'
+import { useTypedSelector } from '../../hooks/useTypedSelector'
+import { useActions } from '../../hooks/useActions'
+import React from 'react'
 
 interface Props {
   isOpen: boolean
@@ -11,6 +15,14 @@ interface Props {
 
 const Navbar: React.FC<Props> = ({ isOpen }) => {
   const router = useRouter()
+  const { isAuth } = useTypedSelector((state) => state.user)
+  const { userSignOut } = useActions()
+
+  const onSignOut = async (e: React.MouseEvent) => {
+    e.preventDefault()
+    await userSignOut()
+    router.push('/signin')
+  }
 
   return (
     <nav
@@ -36,7 +48,14 @@ const Navbar: React.FC<Props> = ({ isOpen }) => {
           Профиль
         </a>
       </Link>
-      {isOpen && (
+
+      {isAuth && (
+        <a className={styles.nav_link} onClick={onSignOut}>
+          Выйти
+        </a>
+      )}
+
+      {!isAuth && isOpen && (
         <>
           <Link href='/signin'>
             <a
@@ -59,7 +78,9 @@ const Navbar: React.FC<Props> = ({ isOpen }) => {
         </>
       )}
 
-      {!isOpen && <NeonButton href='/signin'>Войти / Регистрация</NeonButton>}
+      {!isAuth && !isOpen && (
+        <NeonButton href='/signin'>Войти / Регистрация</NeonButton>
+      )}
     </nav>
   )
 }

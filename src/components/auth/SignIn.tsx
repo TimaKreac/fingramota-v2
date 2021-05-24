@@ -4,21 +4,17 @@ import { useRouter } from 'next/router'
 
 import Input from '../Input/Input'
 
+import { useActions } from '../../hooks/useActions'
+import { UserSignInInfo } from '../../redux/user/user.types'
+
 import styles from './Auth.module.scss'
 
-interface userInfo {
-  email: string
-  password: string
-}
-
-interface Props {
-  onSignIn: (userInfo: userInfo, cb?: () => void) => void
-}
-
-const SignIn: React.FC<Props> = ({ onSignIn }) => {
+const SignIn: React.FC = () => {
   const router = useRouter()
   const [email, setEmail] = useState('tkreac@gmail.com')
   const [password, setPassword] = useState('tima6452')
+
+  const { userSignIn } = useActions()
 
   const setter =
     (set: React.Dispatch<React.SetStateAction<string>>) =>
@@ -26,17 +22,16 @@ const SignIn: React.FC<Props> = ({ onSignIn }) => {
       set(e.target.value)
     }
 
-  const submitHandler = (e: React.FormEvent) => {
+  const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    const userInfo: userInfo = {
+    const userInfo: UserSignInInfo = {
       email,
       password,
     }
 
-    onSignIn(userInfo, () => {
-      router.push('/')
-    })
+    await userSignIn(userInfo)
+    router.push('/')
   }
 
   return (

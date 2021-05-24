@@ -1,4 +1,10 @@
+import { NextPageContext } from 'next'
 import Cookies from 'js-cookie'
+import cookie from 'cookie'
+
+export const parseCookies = (ctx: NextPageContext) => {
+  return cookie.parse(ctx.req ? ctx.req.headers.cookie || '' : document.cookie)
+}
 
 export const isAuth = () => {
   if (process.browser) {

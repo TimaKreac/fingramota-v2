@@ -1,23 +1,28 @@
+import { removeCookie } from './../../utils/auth'
 import { Dispatch } from 'react'
 import axios from 'axios'
 import { API } from '../../../config'
-import { UserInfo, UserActionTypes, UserAction } from './user.types'
-import { setCookie, setLocalStorage, getCookie } from '../../utils/auth'
+import {
+  UserActionTypes,
+  UserAction,
+  UserSignInInfo,
+  UserSignUpInfo,
+  UserInfo,
+} from './user.types'
+import {
+  setCookie,
+  setLocalStorage,
+  removeLocalStorage,
+} from '../../utils/auth'
 
-export const getInitialUserInfo = (): UserAction | undefined => {
-  if (process.browser) {
-    const cookieChecked = getCookie('token')
-    if (cookieChecked) {
-      const userInfo = localStorage.getItem('user')!
-      return {
-        type: UserActionTypes.GET_USER_INFO,
-        payload: JSON.parse(userInfo),
-      }
-    }
+export const getUserInfo = (userInfo: UserInfo): UserAction => {
+  return {
+    type: UserActionTypes.GET_USER_INFO,
+    payload: userInfo,
   }
 }
 
-export const userSignIn = (userInfo: UserInfo, cb?: () => void) => {
+export const userSignIn = (userInfo: UserSignInInfo) => {
   return async (dispatch: Dispatch<UserAction>) => {
     try {
       const { data } = await axios.post(`${API}/signin`, userInfo)
@@ -28,14 +33,13 @@ export const userSignIn = (userInfo: UserInfo, cb?: () => void) => {
         type: UserActionTypes.USER_SIGNED_IN,
         payload: data.user,
       })
-      cb?.()
     } catch (error) {
       console.log(error.message)
     }
   }
 }
 
-export const userSignUp = (userInfo: UserInfo, cb?: () => void) => {
+export const userSignUp = (userInfo: UserSignUpInfo) => {
   return async (dispatch: Dispatch<UserAction>) => {
     try {
       const { data } = await axios.post(`${API}/signup`, userInfo)
@@ -46,7 +50,23 @@ export const userSignUp = (userInfo: UserInfo, cb?: () => void) => {
         type: UserActionTypes.USER_SIGNED_UP,
         payload: data.user,
       })
-      cb?.()
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+}
+
+export const userSignOut = () => {
+  return async (dispatch: Dispatch<UserAction>) => {
+    try {
+      await axios.post(`${API}/signout`)
+
+      removeLocalStorage('user')
+      removeCookie('token')
+
+      dispatch({
+        type: UserActionTypes.USER_SIGNED_OUT,
+      })
     } catch (error) {
       console.log(error.message)
     }

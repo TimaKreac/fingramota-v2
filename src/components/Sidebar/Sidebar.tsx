@@ -120,11 +120,11 @@ const Sidebar: React.FC<Props> = ({ type }) => {
 
         {type === 'categories' && (
           <>
-            <h1>Категории</h1>
+            <h2>Категории</h2>
             <div className={styles.categories}>
               {catergories.map((c) => (
                 <p key={c.slug}>
-                  <Link href={`articles/${c.slug}`}>
+                  <Link href={`/articles/${c.slug}`}>
                     <a>{c.name}</a>
                   </Link>
                 </p>
@@ -135,12 +135,16 @@ const Sidebar: React.FC<Props> = ({ type }) => {
 
         {type === 'articles' && (
           <>
-            <h1>Кредиты</h1>
+            <Link href='/'>
+              <a>
+                <h2 className={styles.category}>Кредиты</h2>
+              </a>
+            </Link>
             <div className={styles.articles}>
               {articles.map((article, index) => (
                 <p key={index} className={styles.article}>
                   <span>{index + 1}</span>
-                  <Link href={`articles/${article.slug}/${index}`}>
+                  <Link href={`/articles/${article.slug}/${index}`}>
                     <a>{article.name}</a>
                   </Link>
                 </p>

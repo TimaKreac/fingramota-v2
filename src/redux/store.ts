@@ -1,7 +1,7 @@
-import { createStore, applyMiddleware, Store } from 'redux'
+import { createStore, applyMiddleware, Store, AnyAction } from 'redux'
 import { createWrapper, MakeStore } from 'next-redux-wrapper'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import thunk from 'redux-thunk'
+import thunk, { ThunkDispatch } from 'redux-thunk'
 import logger from 'redux-logger'
 
 import { reducer, RootState } from './rootReducer'
@@ -14,3 +14,5 @@ const makeStore: MakeStore = () =>
 export const wrapper = createWrapper<Store<RootState>>(makeStore, {
   debug: true,
 })
+
+export type NextThunkDispatch = ThunkDispatch<RootState, void, AnyAction>

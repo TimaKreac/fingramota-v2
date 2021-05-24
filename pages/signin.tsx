@@ -1,7 +1,8 @@
+import { NextPage } from 'next'
 import Header from '../src/components/Header/Header'
 import SignInComponent from '../src/components/auth/SignIn'
 
-const SignIn: React.FC = () => {
+const SignIn: NextPage = () => {
   return (
     <>
       <Header />

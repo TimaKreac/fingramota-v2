@@ -5,20 +5,12 @@ import classNames from 'classnames'
 
 import Input from '../Input/Input'
 
+import { UserSignUpInfo } from '../../redux/user/user.types'
+import { useActions } from '../../hooks/useActions'
+
 import styles from './Auth.module.scss'
 
-interface userInfo {
-  firstName: string
-  lastName: string
-  email: string
-  password: string
-}
-
-interface Props {
-  onSignUp: (userInfo: userInfo, cb?: () => void) => void
-}
-
-const SignUpComponent: React.FC<Props> = ({ onSignUp }) => {
+const SignUpComponent: React.FC = () => {
   const router = useRouter()
   const [email, setEmail] = useState('tkreac@gmail.com')
   const [password, setPassword] = useState('tima6452')
@@ -26,6 +18,8 @@ const SignUpComponent: React.FC<Props> = ({ onSignUp }) => {
   const [firstName, setFirstName] = useState('Тамерлан')
   const [lastName, setLastName] = useState('Тельгарин')
   const [error, setError] = useState('')
+
+  const { userSignUp } = useActions()
 
   const setter =
     (set: React.Dispatch<React.SetStateAction<string>>) =>
@@ -47,16 +41,15 @@ const SignUpComponent: React.FC<Props> = ({ onSignUp }) => {
         throw new Error('Пароли не совпадают')
       }
 
-      const userInfo: userInfo = {
+      const userInfo: UserSignUpInfo = {
         firstName,
         lastName,
         email,
         password,
       }
 
-      onSignUp(userInfo, () => {
-        router.push('/')
-      })
+      userSignUp(userInfo)
+      router.push('/')
     } catch (error) {
       setter(setError)
     }

@@ -11,6 +11,8 @@
   "dependencies": {
     "axios": "^0.21.1",
     "classnames": "^2.3.1",
+    "cookie": "^0.4.1",
+    "fs": "0.0.1-security",
     "js-cookie": "^2.2.1",
     "next": "^10.2.0",
     "next-redux-wrapper": "^6.0.2",
@@ -27,6 +29,7 @@
     "reset-css": "^5.0.1"
   },
   "devDependencies": {
+    "@types/cookie": "^0.4.0",
     "@types/js-cookie": "^2.2.6",
     "@types/nprogress": "^0.2.0",
     "@types/react": "^17.0.4",

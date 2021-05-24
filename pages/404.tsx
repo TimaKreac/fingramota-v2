@@ -1,7 +1,8 @@
+import { NextPage } from 'next'
 import NeonButton from '../src/components/NeonButton/NeonButton'
 import styles from '../src/styles/404.module.scss'
 
-const Custom404: React.FC = () => {
+const Custom404: NextPage = () => {
   return (
     <div className={styles.e404}>
       <h1>404</h1>
