@@ -14,10 +14,15 @@ const Profile: NextPage = () => {
 
 export const getServerSideProps = async (ctx: NextPageContext) => {
   const cookies = parseCookies(ctx)
-  console.log(cookies)
-  return {
-    props: {},
+  if (!cookies.token) {
+    return {
+      redirect: {
+        destination: '/signin',
+        permanent: true,
+      },
+    }
   }
+  return { props: {} }
 }
 
 export default Profile
