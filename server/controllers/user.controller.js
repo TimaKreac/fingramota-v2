@@ -9,6 +9,20 @@ const tokenOptions = {
   sameSite: true,
 }
 
+exports.getUser = async (req, res) => {
+  if (!req.user) {
+    return res.status(400).json({
+      error: 'Пользователь не найден',
+    })
+  }
+
+  const user = await User.findById(req.user.data._id)
+
+  const { firstName, lastName, email, role } = user
+
+  res.json({ firstName, lastName, email, role })
+}
+
 exports.signup = async (req, res) => {
   const { email, password, firstName, lastName } = req.body
 

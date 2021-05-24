@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { isAuth, isAdmin } = require('../middlewares/auth')
+const { isAuth, isAdmin } = require('../middlewares/user.middleware')
 const { getAll, getOne, create } = require('../controllers/article.controller')
 
 // validators
