@@ -18,7 +18,7 @@ export const categoryReducer = (
         ...state,
         categories: action.payload,
       }
-    case CategoryActionTypes.CREATE_CATEGORIES:
+    case CategoryActionTypes.CREATE_CATEGORY:
       return {
         ...state,
         categories: [...state.categories, action.payload],

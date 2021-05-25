@@ -6,26 +6,18 @@ import Layout from '../Layout/Layout'
 import { onChangeSetter } from '../../utils/app'
 import { useActions } from '../../hooks/useActions'
 
-import styles from './CategoryCreate.module.scss'
+import styles from './ArticleCreate.module.scss'
 
-const CategoryCreate: React.FC = () => {
-  const [name, setName] = useState('')
-  const [slug, setSlug] = useState('')
+const ArticleCreate: React.FC = () => {
+  const [title, setTitle] = useState('')
 
   const router = useRouter()
 
-  const { createCategory } = useActions()
+  const {} = useActions()
 
   const submitHandler = async (e: React.FormEvent) => {
     try {
       e.preventDefault()
-
-      const categoryInfo = {
-        name,
-        slug,
-      }
-
-      await createCategory(categoryInfo)
 
       router.push('/')
     } catch (error) {
@@ -36,23 +28,16 @@ const CategoryCreate: React.FC = () => {
   return (
     <Layout>
       <form onSubmit={submitHandler} className={styles.form}>
-        <h2 className={styles.title}>Создание категории</h2>
+        <h2 className={styles.title}>Создание статьи</h2>
         <Input
           title='Название категории'
           name='name'
-          onChange={onChangeSetter(setName)}
-          value={name}
+          onChange={onChangeSetter(setTitle)}
+          value={title}
           required
-          placeholder='Кредиты'
+          placeholder='Название статьи'
         />
-        <Input
-          title='Slug категории'
-          name='slug'
-          onChange={onChangeSetter(setSlug)}
-          value={slug}
-          required
-          placeholder='credits'
-        />
+
         <button className='button secondary' type='submit'>
           Добавить
         </button>
@@ -60,4 +45,4 @@ const CategoryCreate: React.FC = () => {
     </Layout>
   )
 }
-export default CategoryCreate
+export default ArticleCreate

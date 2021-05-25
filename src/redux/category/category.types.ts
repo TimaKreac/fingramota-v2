@@ -9,7 +9,7 @@ export interface CategoryState {
 
 export enum CategoryActionTypes {
   GET_CATEGORIES = 'GET_CATEGORIES',
-  CREATE_CATEGORIES = 'CREATE_CATEGORIES',
+  CREATE_CATEGORY = 'CREATE_CATEGORY',
 }
 
 interface getCategories {
@@ -17,9 +17,9 @@ interface getCategories {
   payload: Category[]
 }
 
-interface createCategories {
-  type: CategoryActionTypes.CREATE_CATEGORIES
+interface createCategory {
+  type: CategoryActionTypes.CREATE_CATEGORY
   payload: Category
 }
 
-export type CategoryAction = getCategories | createCategories
+export type CategoryAction = getCategories | createCategory

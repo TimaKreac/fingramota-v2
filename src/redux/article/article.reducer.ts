@@ -8,7 +8,7 @@ const initialState: ArticleState = {
   articles: [],
 }
 
-export const userReducer = (
+export const articleReducer = (
   state = initialState,
   action: ArticleAction
 ): ArticleState => {

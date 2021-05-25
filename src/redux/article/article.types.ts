@@ -9,6 +9,7 @@ export interface ArticleState {
 
 export enum ArticleActionTypes {
   GET_ARTICLES = 'GET_ARTICLES',
+  CREATE_ARTICLE = 'CREATE_ARTICLE',
 }
 
 interface getArticles {
@@ -16,4 +17,9 @@ interface getArticles {
   payload: Article[]
 }
 
-export type ArticleAction = getArticles
+interface createArticle {
+  type: ArticleActionTypes.CREATE_ARTICLE
+  payload: Article
+}
+
+export type ArticleAction = getArticles | createArticle

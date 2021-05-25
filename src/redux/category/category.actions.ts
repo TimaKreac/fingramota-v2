@@ -28,7 +28,7 @@ export const createCategory = (categoryInfo: Category) => {
       })
 
       dispatch({
-        type: CategoryActionTypes.CREATE_CATEGORIES,
+        type: CategoryActionTypes.CREATE_CATEGORY,
         payload: data,
       })
     } catch (error) {

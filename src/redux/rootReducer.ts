@@ -1,11 +1,14 @@
 import { combineReducers } from 'redux'
 import { HYDRATE } from 'next-redux-wrapper'
+
 import { userReducer } from './user/user.reducer'
 import { categoryReducer } from './category/category.reducer'
+import { articleReducer } from './article/article.reducer'
 
 const rootReducer = combineReducers({
   user: userReducer,
   category: categoryReducer,
+  article: articleReducer,
 })
 
 export const reducer = (state: any, action: any): RootState => {

@@ -1,9 +1,13 @@
 import React, { useEffect } from 'react'
 import Link from 'next/link'
 
-import styles from './Sidebar.module.scss'
+import Categories from './Categories'
+import Articles from './Articles'
+
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import { useActions } from '../../hooks/useActions'
+
+import styles from './Sidebar.module.scss'
 
 interface Props {
   type: 'categories' | 'articles'
@@ -11,67 +15,67 @@ interface Props {
 
 const articles = [
   {
-    name: 'Нужен кредит? Читаем по-новому договор',
+    title: 'Нужен кредит? Читаем по-новому договор',
     slug: 'credits',
   },
   {
-    name: 'Как правильно читать кредитный договор?',
+    title: 'Как правильно читать кредитный договор?',
     slug: 'credits',
   },
   {
-    name: 'Хотите взять микрокредит? Читайте договор!',
+    title: 'Хотите взять микрокредит? Читайте договор!',
     slug: 'credits',
   },
   {
-    name: 'Все о кредите',
+    title: 'Все о кредите',
     slug: 'credits',
   },
   {
-    name: 'Кредитная история',
+    title: 'Кредитная история',
     slug: 'credits',
   },
   {
-    name: 'Что нужно знать перед тем, как взять кредит в банке?',
+    title: 'Что нужно знать перед тем, как взять кредит в банке?',
     slug: 'credits',
   },
   {
-    name: 'Кредитные продукты банков',
+    title: 'Кредитные продукты банков',
     slug: 'credits',
   },
   {
-    name: 'Как проверить свой кредитный отчёт?',
+    title: 'Как проверить свой кредитный отчёт?',
     slug: 'credits',
   },
   {
-    name: 'Пять шагов грамотного заимствования',
+    title: 'Пять шагов грамотного заимствования',
     slug: 'credits',
   },
   {
-    name: 'Хотите взять микрокредит? Читайте договор!',
+    title: 'Хотите взять микрокредит? Читайте договор!',
     slug: 'credits',
   },
   {
-    name: 'Все о кредите',
+    title: 'Все о кредите',
     slug: 'credits',
   },
   {
-    name: 'Кредитная история',
+    title: 'Кредитная история',
     slug: 'credits',
   },
   {
-    name: 'Что нужно знать перед тем, как взять кредит в банке?',
+    title: 'Что нужно знать перед тем, как взять кредит в банке?',
     slug: 'credits',
   },
   {
-    name: 'Кредитные продукты банков',
+    title: 'Кредитные продукты банков',
     slug: 'credits',
   },
   {
-    name: 'Как проверить свой кредитный отчёт?',
+    title: 'Как проверить свой кредитный отчёт?',
     slug: 'credits',
   },
   {
-    name: 'Пять шагов грамотного заимствования',
+    title: 'Пять шагов грамотного заимствования',
     slug: 'credits',
   },
 ]
@@ -82,7 +86,6 @@ const Sidebar: React.FC<Props> = ({ type }) => {
 
   useEffect(() => {
     if (type === 'categories' && !categories.length) {
-      console.log(categories)
       getCategories()
     }
   }, [])
@@ -103,43 +106,9 @@ const Sidebar: React.FC<Props> = ({ type }) => {
           </Link>
         </div>
 
-        {type === 'categories' && (
-          <>
-            <h2>Категории</h2>
-            <div className={styles.categories}>
-              {categories.map((c) => (
-                <Link href={`/articles/${c.slug}`} key={c.slug}>
-                  <a>{c.name}</a>
-                </Link>
-              ))}
-            </div>
-            <p className='text-center'>
-              <Link href='/crud/create-category/'>
-                <a className='button d-ib secondary'>Добавить категорию</a>
-              </Link>
-            </p>
-          </>
-        )}
+        {type === 'categories' && <Categories categories={categories} />}
 
-        {type === 'articles' && (
-          <>
-            <Link href='/'>
-              <a className={styles.category}>
-                <h2>Кредиты</h2>
-              </a>
-            </Link>
-            <div className={styles.articles}>
-              {articles.map((article, index) => (
-                <Link href={`/articles/${article.slug}/${index}`} key={index}>
-                  <a className={styles.article}>
-                    <span>{index + 1}</span>
-                    <p>{article.name}</p>
-                  </a>
-                </Link>
-              ))}
-            </div>
-          </>
-        )}
+        {type === 'articles' && <Articles articles={articles} />}
       </aside>
     </>
   )
