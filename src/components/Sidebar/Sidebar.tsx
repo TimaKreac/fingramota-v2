@@ -1,38 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Link from 'next/link'
 
 import styles from './Sidebar.module.scss'
+import { useTypedSelector } from '../../hooks/useTypedSelector'
+import { useActions } from '../../hooks/useActions'
 
 interface Props {
   type: 'categories' | 'articles'
 }
-
-const catergories = [
-  {
-    name: 'Кредиты',
-    slug: 'credits',
-  },
-  {
-    name: 'Национальная валюта',
-    slug: 'national-currency',
-  },
-  {
-    name: 'Семейный бюджет',
-    slug: 'family-budget',
-  },
-  {
-    name: 'Платежи и переводы',
-    slug: 'payments-transfers',
-  },
-  {
-    name: 'Страхование',
-    slug: 'policy',
-  },
-  {
-    name: 'Свой бизнес',
-    slug: 'own-bussiness',
-  },
-]
 
 const articles = [
   {
@@ -102,6 +77,16 @@ const articles = [
 ]
 
 const Sidebar: React.FC<Props> = ({ type }) => {
+  const { categories } = useTypedSelector((state) => state.category)
+  const { getCategories } = useActions()
+
+  useEffect(() => {
+    if (type === 'categories' && !categories.length) {
+      console.log(categories)
+      getCategories()
+    }
+  }, [])
+
   return (
     <>
       <div className={styles.fake_sidebar}></div>
@@ -122,32 +107,35 @@ const Sidebar: React.FC<Props> = ({ type }) => {
           <>
             <h2>Категории</h2>
             <div className={styles.categories}>
-              {catergories.map((c) => (
-                <p key={c.slug}>
-                  <Link href={`/articles/${c.slug}`}>
-                    <a>{c.name}</a>
-                  </Link>
-                </p>
+              {categories.map((c) => (
+                <Link href={`/articles/${c.slug}`} key={c.slug}>
+                  <a>{c.name}</a>
+                </Link>
               ))}
             </div>
+            <p className='text-center'>
+              <Link href='/crud/create-category/'>
+                <a className='button d-ib secondary'>Добавить категорию</a>
+              </Link>
+            </p>
           </>
         )}
 
         {type === 'articles' && (
           <>
             <Link href='/'>
-              <a>
-                <h2 className={styles.category}>Кредиты</h2>
+              <a className={styles.category}>
+                <h2>Кредиты</h2>
               </a>
             </Link>
             <div className={styles.articles}>
               {articles.map((article, index) => (
-                <p key={index} className={styles.article}>
-                  <span>{index + 1}</span>
-                  <Link href={`/articles/${article.slug}/${index}`}>
-                    <a>{article.name}</a>
-                  </Link>
-                </p>
+                <Link href={`/articles/${article.slug}/${index}`} key={index}>
+                  <a className={styles.article}>
+                    <span>{index + 1}</span>
+                    <p>{article.name}</p>
+                  </a>
+                </Link>
               ))}
             </div>
           </>

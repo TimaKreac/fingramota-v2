@@ -3,7 +3,7 @@ const { errorHandler } = require('../helpers/dbErrorHandler')
 
 exports.getAll = async (req, res) => {
   try {
-    const categories = await Category.find({})
+    const categories = await Category.find({}).select('name slug')
     res.json(categories)
   } catch (error) {
     res.status(400).json({

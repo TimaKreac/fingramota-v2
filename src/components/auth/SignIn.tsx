@@ -6,6 +6,7 @@ import Input from '../Input/Input'
 
 import { useActions } from '../../hooks/useActions'
 import { UserSignInInfo } from '../../redux/user/user.types'
+import { onChangeSetter } from '../../utils/app'
 
 import styles from './Auth.module.scss'
 
@@ -15,12 +16,6 @@ const SignIn: React.FC = () => {
   const [password, setPassword] = useState('tima6452')
 
   const { userSignIn } = useActions()
-
-  const setter =
-    (set: React.Dispatch<React.SetStateAction<string>>) =>
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      set(e.target.value)
-    }
 
   const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -42,7 +37,7 @@ const SignIn: React.FC = () => {
           title='Эл.адрес'
           name='email'
           required
-          onChange={setter(setEmail)}
+          onChange={onChangeSetter(setEmail)}
           placeholder={'example@example.com'}
           value={email}
         />
@@ -51,7 +46,7 @@ const SignIn: React.FC = () => {
           type='password'
           name='password'
           required
-          onChange={setter(setPassword)}
+          onChange={onChangeSetter(setPassword)}
           value={password}
         />
 

@@ -2,6 +2,7 @@ import { NextPageContext } from 'next'
 import cookie from 'cookie'
 import Cookies from 'js-cookie'
 
+// server cookie
 export const parseCookies = (ctx: NextPageContext) => {
   return cookie.parse(ctx.req ? ctx.req.headers.cookie || '' : document.cookie)
 }
@@ -29,14 +30,14 @@ export const removeCookie = (key: string) => {
 }
 
 // localStorage
-export const setLocalStorage = (key: string, value: string) => {
-  if (process.browser) {
-    localStorage.setItem(key, JSON.stringify(value))
-  }
-}
+// export const setLocalStorage = (key: string, value: string) => {
+//   if (process.browser) {
+//     localStorage.setItem(key, JSON.stringify(value))
+//   }
+// }
 
-export const removeLocalStorage = (key: string) => {
-  if (process.browser) {
-    localStorage.removeItem(key)
-  }
-}
+// export const removeLocalStorage = (key: string) => {
+//   if (process.browser) {
+//     localStorage.removeItem(key)
+//   }
+// }

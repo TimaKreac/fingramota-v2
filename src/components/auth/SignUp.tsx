@@ -7,6 +7,7 @@ import Input from '../Input/Input'
 
 import { UserSignUpInfo } from '../../redux/user/user.types'
 import { useActions } from '../../hooks/useActions'
+import { onChangeSetter } from '../../utils/app'
 
 import styles from './Auth.module.scss'
 
@@ -20,12 +21,6 @@ const SignUpComponent: React.FC = () => {
   const [error, setError] = useState('')
 
   const { userSignUp } = useActions()
-
-  const setter =
-    (set: React.Dispatch<React.SetStateAction<string>>) =>
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      set(e.target.value)
-    }
 
   const compare = (password: string, repeat_password: string) => {
     return password === repeat_password
@@ -51,7 +46,7 @@ const SignUpComponent: React.FC = () => {
       userSignUp(userInfo)
       router.push('/')
     } catch (error) {
-      setter(setError)
+      setError(error.message)
     }
   }
 
@@ -64,21 +59,21 @@ const SignUpComponent: React.FC = () => {
           title='Фамилия'
           name='lastName'
           required
-          onChange={setter(setLastName)}
+          onChange={onChangeSetter(setLastName)}
           value={lastName}
         />
         <Input
           title='Имя'
           name='firstName'
           required
-          onChange={setter(setFirstName)}
+          onChange={onChangeSetter(setFirstName)}
           value={firstName}
         />
         <Input
           title='Эл.адрес'
           name='email'
           required
-          onChange={setter(setEmail)}
+          onChange={onChangeSetter(setEmail)}
           placeholder={'example@example.com'}
           value={email}
         />
@@ -87,7 +82,7 @@ const SignUpComponent: React.FC = () => {
           type='password'
           name='password'
           required
-          onChange={setter(setPassword)}
+          onChange={onChangeSetter(setPassword)}
           value={password}
         />
         <Input
@@ -95,7 +90,7 @@ const SignUpComponent: React.FC = () => {
           title='Повторите пароль'
           name='repeatPassword'
           required
-          onChange={setter(setRepeatPassword)}
+          onChange={onChangeSetter(setRepeatPassword)}
           value={repeatPassword}
         />
 

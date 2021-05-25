@@ -45,12 +45,6 @@ i {
   outline: 0;
 }
 
-.required,
-.danger,
-.primary {
-  color: $primary;
-}
-
 .button {
   font-weight: 700;
   border: 0;
@@ -66,6 +60,62 @@ i {
   &:focus {
     background-color: $secondary;
   }
+  &.secondary {
+    background-color: $secondary;
+    &:hover,
+    &:focus {
+      background-color: $primary;
+    }
+  }
+}
+
+.required,
+.danger,
+.primary {
+  color: $primary;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.d-ib {
+  display: inline-block;
+}
+
+#nprogress {
+  & .bar {
+    background: $secondary !important;
+    height: 4px !important;
+  }
+  & .spinner-icon {
+    border-top-color: $secondary !important;
+    border-left-color: $secondary !important;
+  }
+  & .peg {
+    box-shadow: 0 0 10px $secondary, 0 0 5px $secondary !important;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: $gray;
+}
+
+::-webkit-scrollbar-thumb {
+  background: lighten($secondary, 5%);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $secondary;
 }
 
 @media (min-width: 576px) {
@@ -96,40 +146,5 @@ i {
 @media (min-width: 1400px) {
   .container {
     max-width: 1370px;
-  }
-}
-
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: $gray;
-}
-
-::-webkit-scrollbar-thumb {
-  background: lighten($secondary, 5%);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: $secondary;
-}
-
-.d-flex {
-  display: flex;
-}
-
-#nprogress {
-  & .bar {
-    background: $secondary !important;
-    height: 4px !important;
-  }
-  & .spinner-icon {
-    border-top-color: $secondary !important;
-    border-left-color: $secondary !important;
-  }
-  & .peg {
-    box-shadow: 0 0 10px $secondary, 0 0 5px $secondary !important;
   }
 }

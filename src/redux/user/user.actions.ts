@@ -9,11 +9,7 @@ import {
   UserSignUpInfo,
   UserInfo,
 } from './user.types'
-import {
-  setCookie,
-  setLocalStorage,
-  removeLocalStorage,
-} from '../../utils/auth'
+import { setCookie } from '../../utils/auth'
 
 export const getUserInfo = (userInfo: UserInfo): UserAction => {
   return {
@@ -27,7 +23,7 @@ export const userSignIn = (userInfo: UserSignInInfo) => {
     try {
       const { data } = await axios.post(`${API}/signin`, userInfo)
 
-      setLocalStorage('user', data.user)
+      setCookie('user', data.user)
       setCookie('token', data.token)
       dispatch({
         type: UserActionTypes.USER_SIGNED_IN,
@@ -44,7 +40,7 @@ export const userSignUp = (userInfo: UserSignUpInfo) => {
     try {
       const { data } = await axios.post(`${API}/signup`, userInfo)
 
-      setLocalStorage('user', data.user)
+      setCookie('token', data.user)
       setCookie('token', data.token)
       dispatch({
         type: UserActionTypes.USER_SIGNED_UP,
@@ -61,7 +57,7 @@ export const userSignOut = () => {
     try {
       await axios.post(`${API}/signout`)
 
-      removeLocalStorage('user')
+      removeCookie('user')
       removeCookie('token')
 
       dispatch({

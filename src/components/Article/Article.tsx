@@ -3,10 +3,10 @@ import IndexArticle from './Index'
 import styles from './Article.module.scss'
 
 interface Props {
-  index?: boolean
+  index: boolean
 }
 
-const Article: React.FC<Props> = ({ index = false }) => {
+const Article: React.FC<Props> = ({ index }) => {
   if (index) {
     return <IndexArticle />
   }

@@ -8,8 +8,10 @@
   border-bottom: 3px solid $primary;
 }
 
+$sidebar-width: 0;
+
 .fake_sidebar {
-  width: 400px;
+  width: $sidebar-width;
 }
 
 .sidebar {
@@ -17,10 +19,12 @@
   max-height: 100vh;
   height: 100vh;
   overflow-y: auto;
-  width: 400px;
+  width: $sidebar-width;
   position: fixed;
   left: 0;
   top: 0;
+  padding-bottom: 20px;
+
   h2 {
     font-size: 24px;
     text-align: center;
@@ -29,19 +33,31 @@
     border-bottom: 3px solid $primary;
     letter-spacing: 1px;
     transition: 0.5s;
-    &.category:hover {
-      background-color: $primary;
-    }
+  }
+}
+
+.category:hover,
+.category:focus {
+  h2 {
+    background-color: $primary;
   }
 }
 
 .categories {
-  margin-top: 20px;
+  padding: 20px 0;
   text-align: center;
   font-size: 18px;
   font-weight: 700;
-  p {
+  a {
+    display: block;
     padding: 20px 0;
+    border: 2px solid transparent;
+    transition: 0.5s;
+    border-radius: 10px;
+    &:hover,
+    &:focus {
+      border: 2px solid $secondary;
+    }
   }
 }
 
@@ -56,8 +72,10 @@
     display: flex;
     align-items: center;
     border: 2px solid transparent;
+    border-radius: 10px;
     transition: 0.5s;
-    &:hover {
+    &:hover,
+    &:focus {
       border: 2px solid $secondary;
     }
     span {
@@ -67,7 +85,7 @@
       font-size: 32px;
       font-weight: 700;
     }
-    a {
+    p {
       line-height: 1.6;
     }
   }
@@ -94,7 +112,26 @@
 }
 
 @media (min-width: 992px) {
+  $sidebar-width: 350px;
+
+  .fake_sidebar {
+    width: $sidebar-width;
+  }
+  .sidebar {
+    width: $sidebar-width;
+  }
   .logo {
     height: 50px;
+  }
+}
+
+@media (min-width: 1200px) {
+  $sidebar-width: 400px;
+
+  .fake_sidebar {
+    width: $sidebar-width;
+  }
+  .sidebar {
+    width: $sidebar-width;
   }
 }

@@ -1,0 +1,30 @@
+.main {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+@media (min-width: 992px) {
+  .main {
+    width: calc(100vw - 350px);
+    nav {
+      width: 100%;
+      align-self: start;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .main {
+    width: calc(100vw - 400px);
+    nav {
+      width: 100%;
+      align-self: start;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}

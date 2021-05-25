@@ -20,8 +20,8 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {
     const cookieChecked = getCookie('token')
     if (cookieChecked) {
-      if (localStorage.getItem('user')) {
-        const userInfo = localStorage.getItem('user')!
+      if (getCookie('user')) {
+        const userInfo = getCookie('user')!
 
         getUserInfo(JSON.parse(userInfo))
       } else {
