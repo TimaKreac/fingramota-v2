@@ -1,16 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Link from 'next/link'
 
-import { Category } from '../../redux/category/category.types'
-
 import styles from './Sidebar.module.scss'
+import { useActions } from '../../hooks/useActions'
+import { useTypedSelector } from '../../hooks/useTypedSelector'
 
 interface Props {
-  categories: Category[]
   isAdmin: boolean
 }
 
-const Categories: React.FC<Props> = ({ categories, isAdmin }) => {
+const Categories: React.FC<Props> = ({ isAdmin }) => {
+  const { categories } = useTypedSelector((state) => state.category)
+  const { getCategories } = useActions()
+
+  useEffect(() => {
+    if (!categories.length) {
+      getCategories()
+    }
+  }, [])
+
   return (
     <>
       <h2>Категории</h2>

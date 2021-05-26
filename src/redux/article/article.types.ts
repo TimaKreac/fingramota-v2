@@ -1,14 +1,22 @@
+interface Category {
+  name: string
+  slug: string
+}
+
 export interface Article {
   title: string
   slug: string
+  category: Category
 }
 
 export interface ArticleState {
   articles: Article[]
+  category: Category
 }
 
 export enum ArticleActionTypes {
   GET_ARTICLES = 'GET_ARTICLES',
+  GET_CATEGORY = 'GET_CATEGORY',
   CREATE_ARTICLE = 'CREATE_ARTICLE',
 }
 
@@ -22,4 +30,9 @@ interface createArticle {
   payload: Article
 }
 
-export type ArticleAction = getArticles | createArticle
+interface getCategory {
+  type: ArticleActionTypes.GET_CATEGORY
+  payload: Category
+}
+
+export type ArticleAction = getArticles | createArticle | getCategory

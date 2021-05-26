@@ -8,9 +8,12 @@ exports.getAll = async (req, res) => {
   try {
     const { category_slug } = req.params
     const category = await Category.findOne({ slug: category_slug })
-    const articles = await Article.find({ category: category._id }).select(
-      'title slug'
-    )
+    const articles = await Article.find({ category: category._id })
+      .populate({
+        path: 'category',
+        select: 'name slug',
+      })
+      .select('title slug category')
     res.json(articles)
   } catch (error) {
     res.status(400).json({

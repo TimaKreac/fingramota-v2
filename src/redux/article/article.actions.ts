@@ -36,3 +36,18 @@ export const createArticle = (articleInfo: Article) => {
     }
   }
 }
+
+export const getCategory = (slug: string) => {
+  return async (dispatch: Dispatch<ArticleAction>) => {
+    try {
+      const { data } = await axios.get(`${API}/category/${slug}`)
+
+      dispatch({
+        type: ArticleActionTypes.GET_CATEGORY,
+        payload: data,
+      })
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+}
