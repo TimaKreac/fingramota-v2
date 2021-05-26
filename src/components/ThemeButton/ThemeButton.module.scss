@@ -1,0 +1,64 @@
+@import '../../styles/_vars.scss';
+
+body[data-theme='light'] {
+  .button.r,
+  .button.r .layer {
+    border: 1px solid $black;
+  }
+  #button_3 .knobs:before {
+    border: 1px solid $black;
+  }
+}
+
+.button {
+  position: relative;
+  top: 50%;
+  width: 70px;
+  height: 36px;
+  overflow: hidden;
+}
+
+.button.r,
+.button.r .layer {
+  border-radius: 100px;
+  border: 1px solid $secondary;
+}
+
+.checkbox {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 3;
+}
+
+#button_3 .knobs:before {
+  content: url('/images/dark-theme.png');
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 16px;
+  height: 15px;
+  color: #fff;
+  padding: 6px 6px;
+  border: 1px solid $secondary;
+  border-radius: 50%;
+  transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
+}
+
+#button_3 .checkbox:active + .knobs:before {
+  width: 46px;
+  border-radius: 100px;
+}
+
+#button_3 .checkbox:checked:active + .knobs:before {
+  margin-left: -30px;
+}
+
+#button_3 .checkbox:checked + .knobs:before {
+  content: url('/images/light-theme.png');
+  left: 35px;
+}

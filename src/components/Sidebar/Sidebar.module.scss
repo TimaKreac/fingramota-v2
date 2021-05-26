@@ -1,5 +1,11 @@
 @import '../../styles/_vars.scss';
 
+body[data-theme='light'] {
+  .sidebar {
+    color: #fff;
+  }
+}
+
 .fixedLogo {
   padding: 20px 0;
   position: sticky;

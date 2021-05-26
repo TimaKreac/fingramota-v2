@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
-import Input from '../Input/Input'
 import Layout from '../Layout/Layout'
+import Input from '../Input/Input'
 
 import { onChangeSetter } from '../../utils/app'
 import { useActions } from '../../hooks/useActions'

@@ -6,6 +6,7 @@ import classNames from 'classnames'
 import NeonButton from '../NeonButton/NeonButton'
 import styles from './Navbar.module.scss'
 import Hamburger from './Hamburger/Hamburger'
+import ThemeButton from '../ThemeButton/ThemeButton'
 
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import { useActions } from '../../hooks/useActions'
@@ -87,6 +88,7 @@ const Navbar: React.FC = () => {
         {!isAuth && !isOpen && (
           <NeonButton href='/signin'>Войти / Регистрация</NeonButton>
         )}
+        <ThemeButton />
       </nav>
       <Hamburger isOpen={isOpen} onToggleMenu={toggleMenu} />
     </>

@@ -8,6 +8,13 @@ body {
   color: #fff;
   background-color: $black;
   position: relative;
+  transition: background-color 0.5s, color 0.5s;
+  min-height: 100vh;
+}
+
+body[data-theme='light'] {
+  color: $black;
+  background-color: #fff;
 }
 
 .container {

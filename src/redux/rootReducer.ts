@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux'
 import { HYDRATE } from 'next-redux-wrapper'
 
+import { appReducer } from './app/app.reducer'
 import { userReducer } from './user/user.reducer'
 import { categoryReducer } from './category/category.reducer'
 import { articleReducer } from './article/article.reducer'
 
 const rootReducer = combineReducers({
+  app: appReducer,
   user: userReducer,
   category: categoryReducer,
   article: articleReducer,

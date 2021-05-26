@@ -15,9 +15,12 @@ router.events.on('routeChangeError', () => Nprogress.done())
 router.events.on('routeChangeComplete', () => Nprogress.done())
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  const { getUserInfo, userSignOut } = useActions()
+  const { getUserInfo, userSignOut, changeTheme } = useActions()
 
   useEffect(() => {
+    const theme = getCookie('theme')
+    changeTheme(theme ?? 'dark')
+    document.body.setAttribute('data-theme', `${theme ?? 'dark'}`)
     const cookieChecked = getCookie('token')
     if (cookieChecked) {
       if (getCookie('user')) {
