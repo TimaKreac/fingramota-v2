@@ -2,7 +2,7 @@ import { Dispatch } from 'react'
 import axios from 'axios'
 import { API } from '../../../config'
 import { Category, CategoryAction, CategoryActionTypes } from './category.types'
-import { getCookie } from './../../utils/auth'
+import { getCookie } from '../../utils/user'
 
 export const getCategories = () => {
   return async (dispatch: Dispatch<CategoryAction>) => {

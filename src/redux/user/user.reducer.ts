@@ -6,7 +6,7 @@ const initialState: UserState = {
     firstName: '',
     lastName: '',
   },
-  isAuth: false,
+  loggedIn: false,
 }
 
 export const userReducer = (
@@ -18,19 +18,19 @@ export const userReducer = (
       return {
         ...state,
         userInfo: action.payload,
-        isAuth: true,
+        loggedIn: true,
       }
     case UserActionTypes.USER_SIGNED_IN:
       return {
         ...state,
         userInfo: action.payload,
-        isAuth: true,
+        loggedIn: true,
       }
     case UserActionTypes.USER_SIGNED_UP:
       return {
         ...state,
         userInfo: action.payload,
-        isAuth: true,
+        loggedIn: true,
       }
     case UserActionTypes.USER_SIGNED_OUT:
       return {
@@ -39,7 +39,7 @@ export const userReducer = (
           firstName: '',
           lastName: '',
         },
-        isAuth: false,
+        loggedIn: false,
       }
     default:
       return state

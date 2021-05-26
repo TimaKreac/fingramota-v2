@@ -9,11 +9,11 @@ class MyDocument extends Document {
           <meta httpEquiv='X-UA-Compatible' content='ie=edge' />
           <link rel='preconnect' href='https://fonts.gstatic.com' />
           <link
-            href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap'
+            href='https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap'
             rel='stylesheet'
           />
           <link
-            href='https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;900&display=swap'
+            href='https://fonts.googleapis.com/css2?family=Comfortaa:wght@400&display=swap'
             rel='stylesheet'
           />
         </Head>

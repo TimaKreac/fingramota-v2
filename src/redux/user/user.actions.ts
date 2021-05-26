@@ -1,4 +1,4 @@
-import { removeCookie } from './../../utils/auth'
+import { removeCookie } from '../../utils/user'
 import { Dispatch } from 'react'
 import axios from 'axios'
 import { API } from '../../../config'
@@ -9,7 +9,7 @@ import {
   UserSignUpInfo,
   UserInfo,
 } from './user.types'
-import { setCookie } from '../../utils/auth'
+import { setCookie } from '../../utils/user'
 
 export const getUserInfo = (userInfo: UserInfo): UserAction => {
   return {

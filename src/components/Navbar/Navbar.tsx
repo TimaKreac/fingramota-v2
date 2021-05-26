@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
     setisOpen(!isOpen)
   }
 
-  const { isAuth } = useTypedSelector((state) => state.user)
+  const { loggedIn } = useTypedSelector((state) => state.user)
   const { userSignOut } = useActions()
 
   const onSignOut = async (e: React.MouseEvent) => {
@@ -45,7 +45,7 @@ const Navbar: React.FC = () => {
           </a>
         </Link>
 
-        {isAuth && (
+        {loggedIn && (
           <>
             <Link href='/profile'>
               <a
@@ -62,7 +62,7 @@ const Navbar: React.FC = () => {
           </>
         )}
 
-        {!isAuth && isOpen && (
+        {!loggedIn && isOpen && (
           <>
             <Link href='/signin'>
               <a
@@ -85,7 +85,7 @@ const Navbar: React.FC = () => {
           </>
         )}
 
-        {!isAuth && !isOpen && (
+        {!loggedIn && !isOpen && (
           <NeonButton href='/signin'>Войти / Регистрация</NeonButton>
         )}
         <ThemeButton />

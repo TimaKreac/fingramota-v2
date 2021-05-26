@@ -3,7 +3,7 @@
 html,
 body {
   font-family: 'Montserrat', sans-serif;
-  font-weight: 400;
+  font-weight: 5x00;
   font-size: 16px;
   color: #fff;
   background-color: $black;
@@ -14,7 +14,7 @@ body {
 
 body[data-theme='light'] {
   color: $black;
-  background-color: #fff;
+  background-color: #f9f9f9;
 }
 
 .container {
@@ -53,7 +53,7 @@ i {
 }
 
 .button {
-  font-weight: 700;
+  font-weight: 600;
   border: 0;
   display: block;
   margin: 0 auto;

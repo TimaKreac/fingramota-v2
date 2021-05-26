@@ -7,9 +7,10 @@ import styles from './Sidebar.module.scss'
 
 interface Props {
   categories: Category[]
+  isAdmin: boolean
 }
 
-const Categories: React.FC<Props> = ({ categories }) => {
+const Categories: React.FC<Props> = ({ categories, isAdmin }) => {
   return (
     <>
       <h2>Категории</h2>
@@ -20,11 +21,13 @@ const Categories: React.FC<Props> = ({ categories }) => {
           </Link>
         ))}
       </div>
-      <p className='text-center'>
-        <Link href='/crud/create-category/'>
-          <a className='button d-ib secondary'>Добавить категорию</a>
-        </Link>
-      </p>
+      {isAdmin && (
+        <p className='text-center'>
+          <Link href='/crud/create-category/'>
+            <a className='button d-ib secondary'>Добавить категорию</a>
+          </Link>
+        </p>
+      )}
     </>
   )
 }

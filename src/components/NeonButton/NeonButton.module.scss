@@ -1,5 +1,11 @@
 @import '../../styles/vars';
 
+body[data-theme='light'] {
+  .button {
+    color: $black;
+  }
+}
+
 .button {
   display: inline-block;
   cursor: pointer;
@@ -13,11 +19,11 @@
   color: #fff;
   letter-spacing: 1px;
   font-weight: 600;
-  margin-left: 40px;
+  margin-right: 40px;
   &:hover,
   &:focus {
     background: $primary;
-    color: #fff;
+    color: #fff !important;
     box-shadow: 0 0 5px $primary, 0 0 25px $primary, 0 0 40px $primary;
   }
 }

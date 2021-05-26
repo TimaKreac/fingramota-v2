@@ -1,5 +1,5 @@
 export interface AppState {
-  theme: 'dark' | 'light'
+  theme: string
 }
 
 export enum AppActionTypes {
@@ -8,7 +8,7 @@ export enum AppActionTypes {
 
 interface changeTheme {
   type: AppActionTypes.CHANGE_THEME
-  payload: 'dark' | 'light'
+  payload: string
 }
 
 export type AppAction = changeTheme

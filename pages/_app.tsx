@@ -4,7 +4,7 @@ import router from 'next/router'
 import Nprogress from 'nprogress'
 import { wrapper } from '../src/redux/store'
 import { useActions } from '../src/hooks/useActions'
-import { getCookie } from '../src/utils/auth'
+import { getCookie } from '../src/utils/user'
 
 import 'reset-css'
 import 'nprogress/nprogress.css'
@@ -21,6 +21,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     const theme = getCookie('theme')
     changeTheme(theme ?? 'dark')
     document.body.setAttribute('data-theme', `${theme ?? 'dark'}`)
+
     const cookieChecked = getCookie('token')
     if (cookieChecked) {
       if (getCookie('user')) {

@@ -7,9 +7,10 @@ import { useRouter } from 'next/router'
 
 interface Props {
   articles: Article[]
+  isAdmin: boolean
 }
 
-const Articles: React.FC<Props> = ({ articles }) => {
+const Articles: React.FC<Props> = ({ articles, isAdmin }) => {
   const router = useRouter()
   return (
     <>
@@ -20,20 +21,20 @@ const Articles: React.FC<Props> = ({ articles }) => {
       </Link>
       <div className={styles.articles}>
         {articles.map((article, index) => (
-          <>
-            <Link href={`/articles/${article.slug}/${index}`} key={index}>
-              <a className={styles.article}>
-                <span>{index + 1}</span>
-                <p>{article.title}</p>
-              </a>
-            </Link>
-          </>
-        ))}
-        <p className='text-center' style={{ marginTop: 20 }}>
-          <Link href={`/crud/${router.query.slug}/create-article`}>
-            <a className='button d-ib secondary'>Добавить статью</a>
+          <Link href={`/articles/${article.slug}/${index}`} key={index}>
+            <a className={styles.article}>
+              <span>{index + 1}</span>
+              <p>{article.title}</p>
+            </a>
           </Link>
-        </p>
+        ))}
+        {isAdmin && (
+          <p className='text-center' style={{ marginTop: 20 }}>
+            <Link href={`/crud/${router.query.slug}/create-article`}>
+              <a className='button d-ib secondary'>Добавить статью</a>
+            </Link>
+          </p>
+        )}
       </div>
     </>
   )

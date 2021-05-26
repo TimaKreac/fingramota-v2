@@ -1,5 +1,11 @@
 @import '../../styles/vars';
 
+body[data-theme='light'] {
+  .header {
+    background-color: #f9f9f9;
+  }
+}
+
 .header {
   padding: 15px 0;
 }

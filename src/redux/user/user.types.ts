@@ -18,7 +18,7 @@ export interface UserInfo {
 
 export interface UserState {
   userInfo: UserInfo
-  isAuth: boolean
+  loggedIn: boolean
 }
 
 export enum UserActionTypes {
