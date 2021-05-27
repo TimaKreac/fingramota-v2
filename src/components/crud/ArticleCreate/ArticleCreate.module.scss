@@ -1,4 +1,4 @@
-@import '../../styles/_vars.scss';
+@import '../../../styles/_vars.scss';
 
 @keyframes start {
   0% {
@@ -8,6 +8,12 @@
   100% {
     transform: scale(1);
   }
+}
+
+.my_editing_area {
+  background-color: #fff;
+  height: 500px;
+  color: #000;
 }
 
 .form {

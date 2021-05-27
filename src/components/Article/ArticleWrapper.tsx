@@ -6,7 +6,7 @@ import { IArticle } from './Article'
 
 interface Props {
   isIndex?: boolean
-  article: IArticle
+  article?: IArticle
 }
 
 const ArticleWrapper: React.FC<Props> = ({ isIndex = false, article }) => {

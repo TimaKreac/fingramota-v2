@@ -1,7 +1,7 @@
 import { Dispatch } from 'react'
 import axios from 'axios'
 import { API } from '../../../config'
-import { ArticleActionTypes, ArticleAction, Article } from './article.types'
+import { ArticleActionTypes, ArticleAction } from './article.types'
 import { getCookie } from '../../utils/user'
 
 export const getArticles = (slug: string) => {
@@ -19,7 +19,13 @@ export const getArticles = (slug: string) => {
   }
 }
 
-export const createArticle = (articleInfo: Article) => {
+interface ArticleInfo {
+  title: string
+  body: string
+  category_slug: string
+}
+
+export const createArticle = (articleInfo: ArticleInfo) => {
   return async (dispatch: Dispatch<ArticleAction>) => {
     try {
       const token = getCookie('token')

@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
-import Input from '../Input/Input'
-import Layout from '../Layout/Layout'
 import dynamic from 'next/dynamic'
+import Input from '../../Input/Input'
+import Layout from '../../Layout/Layout'
 
-import { onChangeSetter } from '../../utils/app'
-import { useActions } from '../../hooks/useActions'
+import { onChangeSetter } from '../../../utils/app'
+import { useActions } from '../../../hooks/useActions'
 
+import { QuillFormats, QuillModules } from '../../../utils/quill'
 const ReactQuill = dynamic(import('react-quill'), {
   ssr: false,
 })
@@ -14,48 +15,31 @@ const ReactQuill = dynamic(import('react-quill'), {
 import 'react-quill/dist/quill.snow.css'
 import styles from './ArticleCreate.module.scss'
 
-const modules = {
-  toolbar: [
-    [{ header: [1, 2, false] }],
-    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-    [
-      { list: 'ordered' },
-      { list: 'bullet' },
-      { indent: '-1' },
-      { indent: '+1' },
-    ],
-    ['link', 'image'],
-    ['clean'],
-  ],
-}
-
-const formats = [
-  'header',
-  'bold',
-  'italic',
-  'underline',
-  'strike',
-  'blockquote',
-  'list',
-  'bullet',
-  'indent',
-  'link',
-  'image',
-]
-
 const ArticleCreate: React.FC = () => {
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
 
   const router = useRouter()
 
-  const {} = useActions()
+  const { createArticle } = useActions()
 
   const submitHandler = async (e: React.FormEvent) => {
     try {
       e.preventDefault()
 
-      router.push('/')
+      const { category_slug } = router.query
+
+      if (category_slug) {
+        const articleInfo = {
+          title,
+          body,
+          category_slug: category_slug as string,
+        }
+
+        await createArticle(articleInfo)
+
+        router.push(`/articles/${category_slug}`)
+      }
     } catch (error) {
       console.log(error)
     }
@@ -73,16 +57,15 @@ const ArticleCreate: React.FC = () => {
           required
           placeholder='Название статьи'
         />
-        <label>
-          <p>Контент статьи</p>
-          <ReactQuill
-            theme='snow'
-            value={body}
-            onChange={setBody}
-            modules={modules}
-            formats={formats}
-          />
-        </label>
+        <p>Контент статьи</p>
+        <ReactQuill
+          id='myQuill'
+          theme='snow'
+          value={body}
+          onChange={setBody}
+          modules={QuillModules}
+          formats={QuillFormats}
+        ></ReactQuill>
 
         <button className='button secondary' type='submit'>
           Добавить

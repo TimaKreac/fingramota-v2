@@ -45,7 +45,7 @@ const Articles: React.FC<Props> = ({ isAdmin }) => {
         ))}
         {isAdmin && (
           <p className='text-center' style={{ marginTop: 20 }}>
-            <Link href={`/crud/${router.query.slug}/create-article`}>
+            <Link href={`/crud/${category.slug}/create-article`}>
               <a className='button d-ib secondary'>Добавить статью</a>
             </Link>
           </p>

@@ -12,7 +12,7 @@ export interface IArticle {
 
 interface Props {
   index: boolean
-  article: IArticle
+  article?: IArticle
 }
 
 const Article: React.FC<Props> = ({ index, article }) => {
@@ -21,12 +21,14 @@ const Article: React.FC<Props> = ({ index, article }) => {
   }
 
   function createMarkup() {
-    return { __html: article.body }
+    if (article) {
+      return { __html: article.body }
+    }
   }
 
   return (
     <div className={styles.article}>
-      <h1>{article.title}</h1>
+      <h1>{article?.title}</h1>
       <article dangerouslySetInnerHTML={createMarkup()}></article>
     </div>
   )

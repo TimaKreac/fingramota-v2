@@ -1,8 +1,8 @@
 import { NextPage } from 'next'
 import Sidebar from '../../../src/components/Sidebar/Sidebar'
-import ArticleCreate from '../../../src/components/ArticleCreate/ArticleCreate'
+import ArticleCreate from '../../../src/components/crud/ArticleCreate/ArticleCreate'
 
-const Article: NextPage = () => {
+const CreateArticle: NextPage = () => {
   return (
     <div className='d-flex'>
       <Sidebar type='articles' />
@@ -11,4 +11,4 @@ const Article: NextPage = () => {
   )
 }
 
-export default Article
+export default CreateArticle

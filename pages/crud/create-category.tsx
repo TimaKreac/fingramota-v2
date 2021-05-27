@@ -1,5 +1,5 @@
 import { NextPage } from 'next'
-import CategoryCreate from '../../src/components/CategoryCreate/CategoryCreate'
+import CategoryCreate from '../../src/components/crud/CategoryCreate/CategoryCreate'
 import Sidebar from '../../src/components/Sidebar/Sidebar'
 
 const CreateCategory: NextPage = () => {
