@@ -10,18 +10,6 @@ interface Props {
   article: IArticle
 }
 
-export async function getServerSideProps(ctx: NextPageContext) {
-  const res = await axios.get(
-    `${API}/article/${ctx.query.category_slug}/${ctx.query.article_slug}`
-  )
-
-  return {
-    props: {
-      article: res.data,
-    },
-  }
-}
-
 const Article: NextPage<Props> = ({ article }) => {
   return (
     <div className='d-flex'>
@@ -29,6 +17,24 @@ const Article: NextPage<Props> = ({ article }) => {
       <ArticleWrapper article={article} />
     </div>
   )
+}
+
+export async function getServerSideProps(ctx: NextPageContext) {
+  const res = await axios.get(
+    `${API}/article/${ctx.query.category_slug}/${ctx.query.article_slug}`
+  )
+
+  if (!res.data) {
+    return {
+      notFound: true,
+    }
+  }
+
+  return {
+    props: {
+      article: res.data,
+    },
+  }
 }
 
 export default Article

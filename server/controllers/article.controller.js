@@ -3,6 +3,7 @@ const Category = require('../models/category.model')
 const slugify = require('slugify')
 const { stripHtml } = require('string-strip-html')
 const { errorHandler } = require('../helpers/dbErrorHandler')
+const formidable = require('formidable')
 
 exports.getAll = async (req, res) => {
   try {
@@ -41,8 +42,10 @@ exports.getOne = async (req, res) => {
 }
 
 exports.create = async (req, res) => {
-  try {
-    const { title, body, category_slug } = req.body
+  let form = new formidable.IncomingForm()
+
+  form.parse(req, async (err, fields, files) => {
+    const { title, body, category_slug } = fields
 
     const category = await Category.findOne({ slug: category_slug })
 
@@ -64,15 +67,11 @@ exports.create = async (req, res) => {
       mdesc: stripHtml(body.substring(0, 160)).result,
       category: categoryId,
     })
+    res.json(article)
 
     category.articles.push(article._id)
     category.save()
 
     res.status(201).json(article)
-  } catch (error) {
-    res.status(400).json({
-      error: errorHandler(error),
-      message: 'Ошибка при создании статьи',
-    })
-  }
+  })
 }

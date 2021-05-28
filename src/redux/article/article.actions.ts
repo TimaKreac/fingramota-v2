@@ -29,8 +29,16 @@ export const createArticle = (articleInfo: ArticleInfo) => {
   return async (dispatch: Dispatch<ArticleAction>) => {
     try {
       const token = getCookie('token')
-      const { data } = await axios.post(`${API}/article`, articleInfo, {
-        headers: { Authorization: `Bearer ${token}` },
+      const formData = new FormData()
+      formData.set('title', articleInfo.title)
+      formData.set('body', articleInfo.body)
+      formData.set('category_slug', articleInfo.category_slug)
+
+      const { data } = await axios.post(`${API}/article`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
       })
 
       dispatch({

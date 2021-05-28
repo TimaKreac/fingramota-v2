@@ -13,8 +13,8 @@ router.get('/article/:category_slug/:article_slug', getOne)
 
 router.post(
   '/article',
-  articleCreateValidator,
-  runValidation,
+  // articleCreateValidator,
+  // runValidation,
   isAuth,
   isAdmin,
   create

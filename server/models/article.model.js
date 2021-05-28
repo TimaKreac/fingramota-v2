@@ -22,11 +22,9 @@ const articleSchema = new Schema(
     },
     mtitle: {
       type: String,
-      required: true,
     },
     mdesc: {
       type: String,
-      required: true,
     },
     category: {
       type: Types.ObjectId,
