@@ -1,9 +1,11 @@
 interface Category {
+  _id?: string
   name: string
   slug: string
 }
 
 export interface Article {
+  _id: string
   title: string
   slug: string
   category: Category
@@ -18,6 +20,7 @@ export enum ArticleActionTypes {
   GET_ARTICLES = 'GET_ARTICLES',
   GET_CATEGORY = 'GET_CATEGORY',
   CREATE_ARTICLE = 'CREATE_ARTICLE',
+  DELETE_ARTICLE = 'DELETE_ARTICLE',
 }
 
 interface getArticles {
@@ -35,4 +38,13 @@ interface getCategory {
   payload: Category
 }
 
-export type ArticleAction = getArticles | createArticle | getCategory
+interface deleteArticle {
+  type: ArticleActionTypes.DELETE_ARTICLE
+  payload: Article
+}
+
+export type ArticleAction =
+  | getArticles
+  | createArticle
+  | getCategory
+  | deleteArticle

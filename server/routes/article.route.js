@@ -1,7 +1,12 @@
 const express = require('express')
 const router = express.Router()
 const { isAuth, isAdmin } = require('../middlewares/user.middleware')
-const { getAll, getOne, create } = require('../controllers/article.controller')
+const {
+  getAll,
+  getOne,
+  create,
+  remove,
+} = require('../controllers/article.controller')
 
 // validators
 const { runValidation } = require('../validators')
@@ -18,6 +23,15 @@ router.post(
   isAuth,
   isAdmin,
   create
+)
+
+router.delete(
+  '/article/:id',
+  // articleCreateValidator,
+  // runValidation,
+  isAuth,
+  isAdmin,
+  remove
 )
 
 module.exports = router

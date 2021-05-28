@@ -75,3 +75,17 @@ exports.create = async (req, res) => {
     res.status(201).json(article)
   })
 }
+
+exports.remove = async (req, res) => {
+  try {
+    const { id } = req.params
+    const article = await Article.findByIdAndDelete(id)
+
+    res.json(article)
+  } catch (error) {
+    res.status(400).json({
+      error,
+      message: 'Ошибка при удалении статьи',
+    })
+  }
+}

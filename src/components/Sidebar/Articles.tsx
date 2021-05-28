@@ -14,7 +14,7 @@ interface Props {
 const Articles: React.FC<Props> = ({ isAdmin }) => {
   const router = useRouter()
   const { articles, category } = useTypedSelector((state) => state.article)
-  const { getArticles, getCategory } = useActions()
+  const { getArticles, getCategory, deleteArticle } = useActions()
   const { category_slug } = router.query
 
   useEffect(() => {
@@ -23,6 +23,16 @@ const Articles: React.FC<Props> = ({ isAdmin }) => {
       getCategory(category_slug as string)
     }
   }, [router.query])
+
+  const removeArticleHandler =
+    (_id: string, title: string) =>
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault()
+      const answer = confirm(`Удалить статью: ${title}?`)
+      if (answer) {
+        deleteArticle(_id)
+      }
+    }
 
   return (
     <>
@@ -35,11 +45,19 @@ const Articles: React.FC<Props> = ({ isAdmin }) => {
         {articles.map((article, index) => (
           <Link
             href={`/articles/${article.category.slug}/${article.slug}`}
-            key={article.slug}
+            key={article._id}
           >
             <a className={styles.article}>
               <span>{index + 1}</span>
               <p>{article.title}</p>
+              {isAdmin && (
+                <button
+                  className={styles.delete_btn}
+                  onClick={removeArticleHandler(article._id, article.title)}
+                >
+                  <img src='/images/remove (2).svg' alt='delete button' />
+                </button>
+              )}
             </a>
           </Link>
         ))}

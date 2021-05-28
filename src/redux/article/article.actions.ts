@@ -65,3 +65,23 @@ export const getCategory = (slug: string) => {
     }
   }
 }
+
+export const deleteArticle = (_id: string) => {
+  return async (dispatch: Dispatch<ArticleAction>) => {
+    try {
+      const token = getCookie('token')
+      const { data } = await axios.delete(`${API}/article/${_id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      dispatch({
+        type: ArticleActionTypes.DELETE_ARTICLE,
+        payload: data,
+      })
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+}

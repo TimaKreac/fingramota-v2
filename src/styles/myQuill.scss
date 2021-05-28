@@ -23,8 +23,10 @@
       margin-bottom: 20px;
     }
     img {
-      text-align: center;
-      max-width: 300px;
+      display: block;
+      margin: 0 auto;
+      border-radius: 10px;
+      max-width: 50%;
     }
   }
   .ql-toolbar {
