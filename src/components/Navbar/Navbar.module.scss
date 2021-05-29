@@ -9,6 +9,7 @@ body[data-theme='light'] {
 .nav {
   display: none;
   padding: 10px;
+  padding-left: 0;
   &.menu {
     display: flex;
     position: fixed;
@@ -37,7 +38,7 @@ body[data-theme='light'] {
   color: #fff;
   font-weight: 600;
   letter-spacing: 1px;
-  margin-right: 40px;
+  margin-left: 40px;
   position: relative;
   cursor: pointer;
   &:after {

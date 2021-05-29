@@ -66,12 +66,30 @@ const Articles: React.FC<Props> = ({ isAdmin }) => {
             </a>
           </Link>
         ))}
+        <Link href={`/articles/${category_slug}/test`}>
+          <a
+            style={{ padding: 10 }}
+            className={classNames(styles.article, {
+              [styles.active]:
+                router.pathname === '/articles/[category_slug]/test',
+            })}
+          >
+            <p className='text-center'>Тестирование</p>
+          </a>
+        </Link>
         {isAdmin && (
-          <p className='text-center' style={{ marginTop: 20 }}>
-            <Link href={`/crud/${category.slug}/create-article`}>
-              <a className='button d-ib secondary'>Добавить статью</a>
-            </Link>
-          </p>
+          <>
+            <p className='text-center' style={{ marginTop: 40 }}>
+              <Link href={`/crud/${category.slug}/create-article`}>
+                <a className='button d-ib secondary'>Добавить статью</a>
+              </Link>
+            </p>
+            <p className='text-center' style={{ marginTop: 20 }}>
+              <Link href={`/crud/${category.slug}/create-test`}>
+                <a className='button d-ib secondary'>Создать тест</a>
+              </Link>
+            </p>
+          </>
         )}
       </div>
     </>

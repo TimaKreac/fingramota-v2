@@ -18,19 +18,15 @@ const ThemeButton: React.FC = () => {
   }
 
   return (
-    <div className={styles.toggle_button_cover}>
-      <div className={styles.button_cover}>
-        <div className={`${styles.button} ${styles.r}`} id={styles.button_3}>
-          <input
-            type='checkbox'
-            className={styles.checkbox}
-            onChange={changeThemeHandler}
-            checked={theme === 'light'}
-          />
-          <div className={styles.knobs} />
-          <div className={styles.layer} />
-        </div>
-      </div>
+    <div className={`${styles.button} ${styles.r}`} id={styles.button_3}>
+      <input
+        type='checkbox'
+        className={styles.checkbox}
+        onChange={changeThemeHandler}
+        checked={theme === 'light'}
+      />
+      <div className={styles.knobs} />
+      <div className={styles.layer} />
     </div>
   )
 }

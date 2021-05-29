@@ -35,6 +35,8 @@ const Navbar: React.FC = () => {
           [styles.menu]: isOpen,
         })}
       >
+        <ThemeButton />
+
         <Link href='/'>
           <a
             className={classNames(styles.nav_link, {
@@ -88,7 +90,6 @@ const Navbar: React.FC = () => {
         {!loggedIn && !isOpen && (
           <NeonButton href='/signin'>Войти / Регистрация</NeonButton>
         )}
-        <ThemeButton />
       </nav>
       <Hamburger isOpen={isOpen} onToggleMenu={toggleMenu} />
     </>
