@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import classNames from 'classnames'
 
 import { useActions } from '../../hooks/useActions'
 
@@ -15,7 +16,7 @@ const Articles: React.FC<Props> = ({ isAdmin }) => {
   const router = useRouter()
   const { articles, category } = useTypedSelector((state) => state.article)
   const { getArticles, getCategory, deleteArticle } = useActions()
-  const { category_slug } = router.query
+  const { category_slug, article_slug } = router.query
 
   useEffect(() => {
     if (category_slug) {
@@ -47,7 +48,11 @@ const Articles: React.FC<Props> = ({ isAdmin }) => {
             href={`/articles/${article.category.slug}/${article.slug}`}
             key={article._id}
           >
-            <a className={styles.article}>
+            <a
+              className={classNames(styles.article, {
+                [styles.active]: article.slug === article_slug,
+              })}
+            >
               <span>{index + 1}</span>
               <p>{article.title}</p>
               {isAdmin && (

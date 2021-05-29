@@ -2,7 +2,6 @@ const Article = require('../models/article.model')
 const Category = require('../models/category.model')
 const slugify = require('slugify')
 const { stripHtml } = require('string-strip-html')
-const { errorHandler } = require('../helpers/dbErrorHandler')
 const formidable = require('formidable')
 
 exports.getAll = async (req, res) => {
@@ -18,7 +17,7 @@ exports.getAll = async (req, res) => {
     res.json(articles)
   } catch (error) {
     res.status(400).json({
-      error: errorHandler(error),
+      error,
       message: 'Ошибка при получении статей',
     })
   }
@@ -35,45 +34,52 @@ exports.getOne = async (req, res) => {
     res.json(article)
   } catch (error) {
     res.status(400).json({
-      error: errorHandler(error),
+      error,
       message: 'Ошибка при получении статьи',
     })
   }
 }
 
 exports.create = async (req, res) => {
-  let form = new formidable.IncomingForm()
+  try {
+    let form = new formidable.IncomingForm()
 
-  form.parse(req, async (err, fields, files) => {
-    const { title, body, category_slug } = fields
+    form.parse(req, async (err, fields, files) => {
+      const { title, body, category_slug } = fields
 
-    const category = await Category.findOne({ slug: category_slug })
+      const category = await Category.findOne({ slug: category_slug })
 
-    let categoryId
-    if (category) {
-      categoryId = category._id
-    }
+      let categoryId
+      if (category) {
+        categoryId = category._id
+      }
 
-    const slug = slugify(title, {
-      lower: true,
-      locale: 'ru',
+      const slug = slugify(title, {
+        lower: true,
+        locale: 'ru',
+      })
+      const article = await Article.create({
+        title,
+        slug,
+        body,
+        categoryId,
+        mtitle: `${title} | ${process.env.APP_NAME}`,
+        mdesc: stripHtml(body.substring(0, 160)).result,
+        category: categoryId,
+      })
+      res.json(article)
+
+      category.articles.push(article._id)
+      category.save()
+
+      res.status(201).json(article)
     })
-    const article = await Article.create({
-      title,
-      slug,
-      body,
-      categoryId,
-      mtitle: `${title} | ${process.env.APP_NAME}`,
-      mdesc: stripHtml(body.substring(0, 160)).result,
-      category: categoryId,
+  } catch (error) {
+    res.status(400).json({
+      error,
+      message: 'Ошибка при создании статьи',
     })
-    res.json(article)
-
-    category.articles.push(article._id)
-    category.save()
-
-    res.status(201).json(article)
-  })
+  }
 }
 
 exports.remove = async (req, res) => {

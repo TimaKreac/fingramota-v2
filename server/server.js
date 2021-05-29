@@ -11,6 +11,7 @@ const app = express()
 const userRoutes = require('./routes/user.route')
 const categoryRoutes = require('./routes/category.route')
 const articleRoutes = require('./routes/article.route')
+const testRoutes = require('./routes/test.route')
 
 // db
 mongoose
@@ -39,6 +40,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use('/api', userRoutes)
 app.use('/api', categoryRoutes)
 app.use('/api', articleRoutes)
+app.use('/api', testRoutes)
 
 const port = process.env.PORT || 8000
 

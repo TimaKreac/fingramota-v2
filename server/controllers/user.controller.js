@@ -9,10 +9,27 @@ const tokenOptions = {
   sameSite: true,
 }
 
+exports.updateUser = async (req, res) => {
+  const { email, password, firstName, lastName } = req.body
+
+  const user = await User.findOneAndUpdate(
+    { email },
+    { password, firstName, lastName }
+  )
+
+  if (!user) {
+    return res.status(400).json({
+      error: 'Пользователь не найден',
+    })
+  }
+
+  return res.json(user)
+}
+
 exports.getUserRole = async (req, res) => {
   const userId = req.user.data._id
 
-  const user = await User.findById({ _id: userId }).select('role')
+  const user = await User.findById(userId).select('role')
 
   if (!user) {
     return res.status(400).json({

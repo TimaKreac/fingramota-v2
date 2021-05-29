@@ -84,6 +84,9 @@ $sidebar-width: 0;
     border: 2px solid transparent;
     border-radius: 5px;
     transition: 0.5s;
+    &.active {
+      background-color: $secondary;
+    }
     &:hover,
     &:focus {
       border: 2px solid $secondary;

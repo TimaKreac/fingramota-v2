@@ -5,6 +5,7 @@ const {
   signin,
   signout,
   getUserRole,
+  updateUser,
 } = require('../controllers/user.controller')
 const { isAuth } = require('../middlewares/user.middleware')
 
@@ -20,5 +21,6 @@ router.post('/signin', userSigninValidator, runValidation, signin)
 router.post('/signout', signout)
 
 router.get('/user', isAuth, getUserRole)
+router.put('/user', isAuth, updateUser)
 
 module.exports = router
