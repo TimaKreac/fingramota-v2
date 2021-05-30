@@ -1,11 +1,14 @@
 const User = require('../models/user.model')
 const argon2 = require('argon2')
 const jwt = require('jsonwebtoken')
+const Cookies = require('cookies')
+
+const oneYear = 31536000000
 
 const tokenOptions = {
-  maxAge: 31536000000,
+  maxAge: oneYear,
+  expires: new Date(Date.now() + oneYear),
   httpOnly: true,
-  secure: true,
   sameSite: true,
 }
 
@@ -43,6 +46,8 @@ exports.getUserRole = async (req, res) => {
 exports.signup = async (req, res) => {
   const { email, password, firstName, lastName } = req.body
 
+  const cookies = new Cookies(req, res)
+
   const candidate = await User.findOne({ email })
 
   if (candidate) {
@@ -60,12 +65,7 @@ exports.signup = async (req, res) => {
     lastName,
   })
   const token = generateJWT(user)
-  res.cookie('token', token, {
-    maxAge: 31536000000,
-    httpOnly: true,
-    secure: true,
-    sameSite: true,
-  })
+  cookies.set('token', token, tokenOptions)
 
   res.status(201).json({
     user: {
@@ -80,6 +80,8 @@ exports.signup = async (req, res) => {
 
 exports.signin = async (req, res) => {
   const { email, password } = req.body
+
+  const cookies = new Cookies(req, res)
 
   const user = await User.findOne({ email })
 
@@ -98,7 +100,7 @@ exports.signin = async (req, res) => {
   }
 
   const token = generateJWT(user)
-  res.cookie('token', token, tokenOptions)
+  cookies.set('token', token, tokenOptions)
 
   res.json({
     user: {
@@ -112,7 +114,8 @@ exports.signin = async (req, res) => {
 }
 
 exports.signout = (req, res) => {
-  res.clearCookie('token', tokenOptions)
+  const cookies = new Cookies(req, res)
+  cookies.set('token', { expires: Date.now() })
   res.json({
     message: 'Успешный выход из аккаунта',
   })

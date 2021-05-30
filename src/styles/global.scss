@@ -4,7 +4,7 @@
 html,
 body {
   font-family: 'Montserrat', sans-serif;
-  font-weight: 5x00;
+  font-weight: 500;
   font-size: 16px;
   color: #fff;
   background-color: $black;
@@ -30,7 +30,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-size: 30px;
+  font-size: 26px;
   font-family: 'Comfortaa', cursive;
   font-weight: 900;
 }
@@ -73,6 +73,17 @@ button {
   color: #fff;
   transition: all 0.5s;
   border: 2px solid transparent;
+  font-size: 14px;
+  &.line {
+    background-color: transparent;
+    padding: 0;
+    padding-bottom: 3px;
+    &:hover,
+    &:focus {
+      border-bottom: 2px solid $primary;
+      background-color: transparent;
+    }
+  }
   &.outlined {
     background: transparent;
     border: 2px solid $secondary;

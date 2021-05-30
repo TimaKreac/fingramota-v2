@@ -30,7 +30,7 @@ export const userSignIn = (userInfo: UserSignInInfo) => {
         payload: data.user,
       })
     } catch (error) {
-      console.log(error.message)
+      console.error(error.message)
     }
   }
 }
@@ -47,7 +47,7 @@ export const userSignUp = (userInfo: UserSignUpInfo) => {
         payload: data.user,
       })
     } catch (error) {
-      console.log(error.message)
+      console.error(error.message)
     }
   }
 }
@@ -64,7 +64,7 @@ export const userSignOut = () => {
         type: UserActionTypes.USER_SIGNED_OUT,
       })
     } catch (error) {
-      console.log(error.message)
+      console.error(error.message)
     }
   }
 }

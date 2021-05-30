@@ -18,7 +18,6 @@ const testSchema = new Schema(
       unique: true,
     },
   },
-
   { timestamps: true }
 )
 

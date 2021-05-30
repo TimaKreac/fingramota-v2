@@ -2,11 +2,17 @@
 
 .test {
   margin-top: 50px;
+  align-self: center;
+  font-size: 14px;
 
   h1 {
+    font-size: 26px;
     margin-bottom: 30px;
     letter-spacing: 1px;
     line-height: 1.4;
+  }
+  h3 {
+    font-size: 20px;
   }
   ul {
     list-style: inside lower-alpha;

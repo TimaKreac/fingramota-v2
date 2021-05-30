@@ -7,6 +7,7 @@ import Input from '../Input/Input'
 import { useActions } from '../../hooks/useActions'
 import { UserSignInInfo } from '../../redux/user/user.types'
 import { onChangeSetter } from '../../utils/app'
+import { getCookie } from '../../utils/user'
 
 import styles from './Auth.module.scss'
 
@@ -26,7 +27,9 @@ const SignIn: React.FC = () => {
     }
 
     await userSignIn(userInfo)
-    router.push('/')
+
+    const token = getCookie('token')
+    if (token) router.push('/')
   }
 
   return (

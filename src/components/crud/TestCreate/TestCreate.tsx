@@ -44,7 +44,7 @@ const TestCreate: React.FC = () => {
 
       const { category_slug } = router.query
 
-      const { data } = await axios.post(
+      await axios.post(
         `${API}/${category_slug}/test`,
         {
           questions: testInfo,
@@ -114,7 +114,7 @@ const TestCreate: React.FC = () => {
           Текущее количество вопросов: <span>{counter}</span>
         </p>
 
-        <button className='button secondary' type='submit'>
+        <button className='button line' type='submit'>
           Добавить вопрос
         </button>
         <button className='button' onClick={addTestHandler}>

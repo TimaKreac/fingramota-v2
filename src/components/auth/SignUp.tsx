@@ -8,6 +8,7 @@ import Input from '../Input/Input'
 import { UserSignUpInfo } from '../../redux/user/user.types'
 import { useActions } from '../../hooks/useActions'
 import { onChangeSetter } from '../../utils/app'
+import { getCookie } from '../../utils/user'
 
 import styles from './Auth.module.scss'
 
@@ -43,8 +44,10 @@ const SignUpComponent: React.FC = () => {
         password,
       }
 
-      userSignUp(userInfo)
-      router.push('/')
+      await userSignUp(userInfo)
+
+      const token = getCookie('token')
+      if (token) router.push('/')
     } catch (error) {
       setError(error.message)
     }

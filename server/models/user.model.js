@@ -44,6 +44,16 @@ const userSchema = new Schema(
       type: String,
       default: '/standart-avatar.png',
     },
+
+    completed_tests: [
+      {
+        category_slug: {
+          type: String,
+          unique: true,
+        },
+        percentCorrect: Number,
+      },
+    ],
   },
   { timestamps: true }
 )
