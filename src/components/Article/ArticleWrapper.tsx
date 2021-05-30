@@ -2,7 +2,7 @@ import React from 'react'
 import Article from './Article'
 import Layout from '../Layout/Layout'
 
-import { IArticle } from './Article'
+import { IArticle } from '../../types/article'
 
 interface Props {
   isIndex?: boolean

@@ -4,7 +4,7 @@ import { API } from '../../../config'
 import ArticleWrapper from '../../../src/components/Article/ArticleWrapper'
 import Sidebar from '../../../src/components/Sidebar/Sidebar'
 
-import { IArticle } from '../../../src/components/Article/Article'
+import { IArticle } from '../../../src/types/article'
 
 interface Props {
   article: IArticle

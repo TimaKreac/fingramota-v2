@@ -1,14 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import IndexArticle from './Index'
-import styles from './Article.module.scss'
+import { checkIsAdmin, getCookie } from '../../utils/user'
+import { useActions } from '../../hooks/useActions'
+import { IArticle } from '../../types/article'
 
-export interface IArticle {
-  title: string
-  slug: string
-  body: string
-  mtitle: string
-  mdesc: string
-}
+import styles from './Article.module.scss'
 
 interface Props {
   index: boolean
@@ -20,6 +16,27 @@ const Article: React.FC<Props> = ({ index, article }) => {
     return <IndexArticle />
   }
 
+  const [isAdmin, setIsAdmin] = useState(false)
+
+  const { deleteArticle } = useActions()
+
+  useEffect(() => {
+    const token = getCookie('token')
+    if (token) {
+      checkIsAdmin(token).then((res) => setIsAdmin(res))
+    }
+  }, [])
+
+  const removeArticleHandler =
+    (_id: string, title: string) =>
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault()
+      const answer = confirm(`Удалить статью: ${title}?`)
+      if (answer) {
+        deleteArticle(_id)
+      }
+    }
+
   function createMarkup() {
     if (article) {
       return { __html: article.body }
@@ -30,6 +47,14 @@ const Article: React.FC<Props> = ({ index, article }) => {
     <div className={styles.article}>
       <h1>{article?.title}</h1>
       <article dangerouslySetInnerHTML={createMarkup()}></article>
+      {isAdmin && article && (
+        <button
+          className={`button sm ${styles.delete_btn}`}
+          onClick={removeArticleHandler(article._id, article.title)}
+        >
+          Удалить статью
+        </button>
+      )}
     </div>
   )
 }

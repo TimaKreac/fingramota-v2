@@ -1,5 +1,5 @@
 export interface IQuestion {
-  _id: string
+  _id?: string
   question: string
   option_1: string
   option_2: string
@@ -10,7 +10,7 @@ export interface IQuestion {
 }
 
 export interface ITest {
-  _id: string
+  _id?: string
   questions: IQuestion[]
   category_slug: string
 }

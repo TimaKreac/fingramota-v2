@@ -67,7 +67,7 @@ const ArticleCreate: React.FC = () => {
           formats={QuillFormats}
         ></ReactQuill>
 
-        <button className='button secondary' type='submit'>
+        <button className='button sm secondary' type='submit'>
           Добавить
         </button>
       </form>

@@ -15,7 +15,7 @@ interface Props {
 const Articles: React.FC<Props> = ({ isAdmin }) => {
   const router = useRouter()
   const { articles, category } = useTypedSelector((state) => state.article)
-  const { getArticles, getCategory, deleteArticle } = useActions()
+  const { getArticles, getCategory } = useActions()
   const { category_slug, article_slug } = router.query
 
   useEffect(() => {
@@ -24,16 +24,6 @@ const Articles: React.FC<Props> = ({ isAdmin }) => {
       getCategory(category_slug as string)
     }
   }, [router.query])
-
-  const removeArticleHandler =
-    (_id: string, title: string) =>
-    (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.preventDefault()
-      const answer = confirm(`Удалить статью: ${title}?`)
-      if (answer) {
-        deleteArticle(_id)
-      }
-    }
 
   return (
     <>
@@ -55,14 +45,6 @@ const Articles: React.FC<Props> = ({ isAdmin }) => {
             >
               <span>{index + 1}</span>
               <p>{article.title}</p>
-              {isAdmin && (
-                <button
-                  className={styles.delete_btn}
-                  onClick={removeArticleHandler(article._id, article.title)}
-                >
-                  <img src='/images/remove (2).svg' alt='delete button' />
-                </button>
-              )}
             </a>
           </Link>
         ))}
@@ -78,18 +60,23 @@ const Articles: React.FC<Props> = ({ isAdmin }) => {
           </a>
         </Link>
         {isAdmin && (
-          <>
-            <p className='text-center' style={{ marginTop: 40 }}>
+          <div className='d-flex jcc' style={{ marginTop: 40 }}>
+            <p className='text-center'>
               <Link href={`/crud/${category.slug}/create-article`}>
-                <a className='button d-ib secondary'>Добавить статью</a>
+                <a
+                  className='button sm d-ib  secondary'
+                  style={{ marginRight: 20 }}
+                >
+                  Добавить статью
+                </a>
               </Link>
             </p>
-            <p className='text-center' style={{ marginTop: 20 }}>
+            <p className='text-center'>
               <Link href={`/crud/${category.slug}/create-test`}>
-                <a className='button d-ib secondary'>Создать тест</a>
+                <a className='button sm d-ib outlined'>Создать тест</a>
               </Link>
             </p>
-          </>
+          </div>
         )}
       </div>
     </>

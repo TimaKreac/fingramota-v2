@@ -13,7 +13,7 @@ const Profile: React.FC = () => {
       <div className={styles.profile}>
         <div className={styles.profile_image}>
           <img src='images/standart-avatar.jpg' alt='Аватар профиля' />
-          <button className='button'>Редактировать</button>
+          <button className='button sm'>Редактировать</button>
         </div>
         <form className={styles.profile_form}>
           <Input title='Фамилия' name='lastName' value={lastName} disabled />

@@ -32,7 +32,7 @@ const Categories: React.FC<Props> = ({ isAdmin }) => {
       {isAdmin && (
         <p className='text-center'>
           <Link href='/crud/create-category/'>
-            <a className='button d-ib secondary'>Добавить категорию</a>
+            <a className='button sm d-ib secondary'>Добавить категорию</a>
           </Link>
         </p>
       )}

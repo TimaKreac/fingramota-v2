@@ -13,8 +13,12 @@ const testSchema = new Schema(
         answer: String,
       },
     ],
-    category_slug: String,
+    category_slug: {
+      type: String,
+      unique: true,
+    },
   },
+
   { timestamps: true }
 )
 
