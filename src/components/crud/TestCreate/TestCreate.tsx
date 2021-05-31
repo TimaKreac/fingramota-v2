@@ -32,7 +32,16 @@ const TestCreate: React.FC = () => {
     setCounter((prev) => prev + 1)
     setTestInfo([
       ...testInfo,
-      { question, option_1, option_2, option_3, option_4, option_5, answer },
+      {
+        _id: '',
+        question,
+        option_1,
+        option_2,
+        option_3,
+        option_4,
+        option_5,
+        answer,
+      },
     ])
   }
 
@@ -42,10 +51,10 @@ const TestCreate: React.FC = () => {
 
       const token = getCookie('token')
 
-      const { category_slug } = router.query
+      const { categorySlug } = router.query
 
       await axios.post(
-        `${API}/${category_slug}/test`,
+        `${API}/${categorySlug}/test`,
         {
           questions: testInfo,
         },
@@ -56,7 +65,7 @@ const TestCreate: React.FC = () => {
         }
       )
 
-      router.push(`/articles/${category_slug}`)
+      router.push(`/articles/${categorySlug}`)
     } catch (error) {
       console.log(error)
     }

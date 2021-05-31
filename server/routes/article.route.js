@@ -12,9 +12,9 @@ const {
 const { runValidation } = require('../validators')
 const { articleCreateValidator } = require('../validators/article.validator')
 
-router.get('/article/:category_slug', getAll)
+router.get('/article/:categorySlug', getAll)
 
-router.get('/article/:category_slug/:article_slug', getOne)
+router.get('/article/:categorySlug/:articleSlug', getOne)
 
 router.post(
   '/article',

@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import classNames from 'classnames'
 
 import { useActions } from '../../hooks/useActions'
+import { useTypedSelector } from '../../hooks/useTypedSelector'
 
 import styles from './Sidebar.module.scss'
-import { useTypedSelector } from '../../hooks/useTypedSelector'
 
 interface Props {
   isAdmin: boolean
@@ -16,12 +16,12 @@ const Articles: React.FC<Props> = ({ isAdmin }) => {
   const router = useRouter()
   const { articles, category } = useTypedSelector((state) => state.article)
   const { getArticles, getCategory } = useActions()
-  const { category_slug, article_slug } = router.query
+  const { categorySlug, articleSlug } = router.query
 
   useEffect(() => {
-    if (category_slug) {
-      getArticles(category_slug as string)
-      getCategory(category_slug as string)
+    if (categorySlug) {
+      getArticles(categorySlug as string)
+      getCategory(categorySlug as string)
     }
   }, [router.query])
 
@@ -40,7 +40,7 @@ const Articles: React.FC<Props> = ({ isAdmin }) => {
           >
             <a
               className={classNames(styles.article, {
-                [styles.active]: article.slug === article_slug,
+                [styles.active]: article.slug === articleSlug,
               })}
             >
               <span>{index + 1}</span>
@@ -48,17 +48,6 @@ const Articles: React.FC<Props> = ({ isAdmin }) => {
             </a>
           </Link>
         ))}
-        <Link href={`/articles/${category_slug}/test`}>
-          <a
-            style={{ padding: 10 }}
-            className={classNames(styles.article, {
-              [styles.active]:
-                router.pathname === '/articles/[category_slug]/test',
-            })}
-          >
-            <p className='text-center'>Тестирование</p>
-          </a>
-        </Link>
         {isAdmin && (
           <div className='d-flex jcc' style={{ marginTop: 40 }}>
             <p className='text-center'>

@@ -13,7 +13,7 @@ const testSchema = new Schema(
         answer: String,
       },
     ],
-    category_slug: {
+    categorySlug: {
       type: String,
       unique: true,
     },

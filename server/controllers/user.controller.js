@@ -3,11 +3,11 @@ const argon2 = require('argon2')
 const jwt = require('jsonwebtoken')
 const Cookies = require('cookies')
 
-const oneYear = 31536000000
+const ONE_YEAR = 31536000000
 
 const tokenOptions = {
-  maxAge: oneYear,
-  expires: new Date(Date.now() + oneYear),
+  maxAge: ONE_YEAR,
+  expires: new Date(Date.now() + ONE_YEAR),
   httpOnly: true,
   sameSite: true,
 }
@@ -29,10 +29,10 @@ exports.updateUser = async (req, res) => {
   return res.json(user)
 }
 
-exports.getUserRole = async (req, res) => {
+exports.getUser = async (req, res) => {
   const userId = req.user.data._id
 
-  const user = await User.findById(userId).select('role')
+  const user = await User.findById(userId).select('role completedTests')
 
   if (!user) {
     return res.status(400).json({

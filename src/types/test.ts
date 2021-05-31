@@ -14,3 +14,9 @@ export interface ITest {
   questions: IQuestion[]
   category_slug: string
 }
+
+export interface ITestResult {
+  _id: string
+  categorySlug: string
+  percentCorrect: number
+}

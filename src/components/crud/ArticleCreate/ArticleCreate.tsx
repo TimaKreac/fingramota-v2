@@ -27,18 +27,18 @@ const ArticleCreate: React.FC = () => {
     try {
       e.preventDefault()
 
-      const { category_slug } = router.query
+      const { categorySlug } = router.query
 
-      if (category_slug) {
+      if (categorySlug) {
         const articleInfo = {
           title,
           body,
-          category_slug: category_slug as string,
+          categorySlug: categorySlug as string,
         }
 
         await createArticle(articleInfo)
 
-        router.push(`/articles/${category_slug}`)
+        router.push(`/articles/${categorySlug}`)
       }
     } catch (error) {
       console.log(error)

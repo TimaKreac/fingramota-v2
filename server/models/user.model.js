@@ -45,9 +45,9 @@ const userSchema = new Schema(
       default: '/standart-avatar.png',
     },
 
-    completed_tests: [
+    completedTests: [
       {
-        category_slug: {
+        categorySlug: {
           type: String,
           unique: true,
         },

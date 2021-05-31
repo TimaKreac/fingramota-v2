@@ -4,7 +4,7 @@ const {
   signup,
   signin,
   signout,
-  getUserRole,
+  getUser,
   updateUser,
 } = require('../controllers/user.controller')
 const { isAuth } = require('../middlewares/user.middleware')
@@ -20,7 +20,7 @@ router.post('/signup', userSignupValidator, runValidation, signup)
 router.post('/signin', userSigninValidator, runValidation, signin)
 router.post('/signout', signout)
 
-router.get('/user', isAuth, getUserRole)
+router.get('/user', isAuth, getUser)
 router.put('/user', isAuth, updateUser)
 
 module.exports = router

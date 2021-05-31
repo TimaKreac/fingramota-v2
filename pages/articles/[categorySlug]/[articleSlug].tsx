@@ -21,7 +21,7 @@ const Article: NextPage<Props> = ({ article }) => {
 
 export async function getServerSideProps(ctx: NextPageContext) {
   const res = await axios.get(
-    `${API}/article/${ctx.query.category_slug}/${ctx.query.article_slug}`
+    `${API}/article/${ctx.query.categorySlug}/${ctx.query.articleSlug}`
   )
 
   if (!res.data) {

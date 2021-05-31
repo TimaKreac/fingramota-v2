@@ -16,7 +16,7 @@ const Questions: React.FC<Props> = ({ questions }) => {
   const [error, setError] = useState('')
 
   const router = useRouter()
-  const { category_slug } = router.query
+  const { categorySlug } = router.query
 
   const finishTest = async () => {
     let answeredCounter = 0
@@ -39,7 +39,7 @@ const Questions: React.FC<Props> = ({ questions }) => {
         const token = getCookie('token')
         await axios.post(
           `${API}/test/finish`,
-          { percentCorrect, category_slug },
+          { percentCorrect, categorySlug },
           {
             headers: {
               Authorization: `Bearer ${token}`,

@@ -22,7 +22,7 @@ export const getArticles = (slug: string) => {
 interface ArticleInfo {
   title: string
   body: string
-  category_slug: string
+  categorySlug: string
 }
 
 export const createArticle = (articleInfo: ArticleInfo) => {
@@ -32,7 +32,7 @@ export const createArticle = (articleInfo: ArticleInfo) => {
       const formData = new FormData()
       formData.set('title', articleInfo.title)
       formData.set('body', articleInfo.body)
-      formData.set('category_slug', articleInfo.category_slug)
+      formData.set('category_slug', articleInfo.categorySlug)
 
       const { data } = await axios.post(`${API}/article`, formData, {
         headers: {

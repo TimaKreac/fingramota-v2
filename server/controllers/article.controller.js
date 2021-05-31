@@ -6,8 +6,8 @@ const formidable = require('formidable')
 
 exports.getAll = async (req, res) => {
   try {
-    const { category_slug } = req.params
-    const category = await Category.findOne({ slug: category_slug })
+    const { categorySlug } = req.params
+    const category = await Category.findOne({ slug: categorySlug })
     const articles = await Article.find({ category: category._id })
       .populate({
         path: 'category',
@@ -25,10 +25,10 @@ exports.getAll = async (req, res) => {
 
 exports.getOne = async (req, res) => {
   try {
-    const { category_slug, article_slug } = req.params
-    const category = await Category.findOne({ slug: category_slug })
+    const { categorySlug, articleSlug } = req.params
+    const category = await Category.findOne({ slug: categorySlug })
     const article = await Article.findOne({
-      slug: article_slug,
+      slug: articleSlug,
       category: category._id,
     })
     res.json(article)
@@ -45,9 +45,9 @@ exports.create = async (req, res) => {
     let form = new formidable.IncomingForm()
 
     form.parse(req, async (err, fields, files) => {
-      const { title, body, category_slug } = fields
+      const { title, body, categorySlug } = fields
 
-      const category = await Category.findOne({ slug: category_slug })
+      const category = await Category.findOne({ slug: categorySlug })
 
       let categoryId
       if (category) {

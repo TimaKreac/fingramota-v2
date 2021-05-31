@@ -3,8 +3,8 @@ const User = require('../models/user.model')
 
 exports.getOne = async (req, res) => {
   try {
-    const { category_slug } = req.params
-    const test = await Test.findOne({ category_slug })
+    const { categorySlug } = req.params
+    const test = await Test.findOne({ categorySlug })
 
     res.json(test)
   } catch (error) {
@@ -18,11 +18,11 @@ exports.getOne = async (req, res) => {
 exports.create = async (req, res) => {
   try {
     const { questions } = req.body
-    const { category_slug } = req.params
+    const { categorySlug } = req.params
 
     const test = await Test.create({
       questions,
-      category_slug,
+      categorySlug,
     })
 
     res.json(test)
@@ -36,11 +36,21 @@ exports.create = async (req, res) => {
 
 exports.finish = async (req, res) => {
   try {
-    const { percentCorrect, category_slug } = req.body
+    const { percentCorrect, categorySlug } = req.body
 
     const user = await User.findById(req.user.data._id)
 
-    user.completed_tests.push({ category_slug, percentCorrect })
+    const isExists = user.completedTests.find((el) => {
+      return categorySlug === el.categorySlug
+    })
+
+    if (isExists) {
+      return res.status(400).json({
+        error: 'Такой тест уже был пройден',
+      })
+    }
+
+    user.completedTests.push({ categorySlug, percentCorrect })
 
     await user.save()
 
